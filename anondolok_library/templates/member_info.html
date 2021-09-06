@@ -1,0 +1,253 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>Member Information</title> {% endblock%} {% block link %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/member_info.css' %}"
+/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'assets/css/bootstrap.min.css' %}"
+/>
+{% endblock%} {% block content %}
+<!-- -------------------------------------- member info section -------------------------------------------- -->
+
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="MI_title"
+    >
+      ...
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">English</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+<hr />
+
+<!--member-information-detail part start  -->
+<section class="member-information-detail">
+  <div style="margin: 0px; padding: 0px" class="container">
+    <div class="member-information-all shadow mx-auto my-5">
+      <!-- Member Information part start -->
+      <div style="margin-left: 20px" class="row">
+        <div class="col-12">
+          <div class="member-information ps-4 pt-4 pb-4">
+            <h3
+              style="
+                font-weight: bold;
+                font-size: 36px;
+                color: #3d3d3d;
+                margin: 0;
+              "
+              class="langchange"
+              data-key="MI_title"
+            >
+              Member Information
+            </h3>
+          </div>
+        </div>
+      </div>
+      <!-- Member Information part end -->
+
+      <!-- member-bio part start -->
+      <div style="margin-left: 20px" class="row">
+        <div class="col-md-8 col-sm-12">
+          <div class="member-bio">
+            <div class="member-name-id">
+              <ul>
+                <li class="name-detail langchange" data-key="fullName">
+                  Full Name
+                </li>
+                <li>{{ user.first_name }}</li>
+              </ul>
+            </div>
+            <div class="member-name-id">
+              <ul>
+                <li class="name-detail langchange" data-key="userName">
+                  User Name
+                </li>
+                <li>{{ user.username }}</li>
+              </ul>
+            </div>
+            <div class="member-name-id">
+              <ul>
+                <li class="name-detail langchange" data-key="email">Email</li>
+                <li>{{ user.email }}</li>
+              </ul>
+            </div>
+            <div class="member-name-id">
+              <ul>
+                <li class="name-detail langchange" data-key="address">
+                  Address
+                </li>
+                <li>{{ userInfo.presentAddress }}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="member-bio">
+            <div class="member-name-id">
+              <ul>
+                <li class="name-detail langchange" data-key="memberID">
+                  Member ID
+                </li>
+                <li>{{ user.id }}</li>
+              </ul>
+            </div>
+
+            <div class="member-name-id">
+              <ul>
+                <li class="name-detail langchange" data-key="phone">
+                  Phone Number
+                </li>
+                <li>{{ user.last_name }}</li>
+              </ul>
+            </div>
+            <div class="member-name-id">
+              <ul>
+                <li class="name-detail langchange" data-key="Occupation">
+                  Occupation
+                </li>
+                <li>{{ userInfo.occupation }}</li>
+              </ul>
+            </div>
+            <div class="member-name-id">
+              <ul>
+                <li class="name-detail langchange" data-key="birthDate">
+                  Date of Birth
+                </li>
+                <li>{{ userInfo.dateOfBirth }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <div class="img-thumbnail">
+            {% comment %} custom image class user-img {% endcomment %}
+            <img src="{{ userInfo.profilePic.url }}" alt="Profile Photo" />
+          </div>
+        </div>
+      </div>
+
+      <!-- member-bio part end-->
+
+      <!-- button part start -->
+      <div class="row">
+        <div class="col-12">
+          <div class="all-button">
+            <a
+              href="/member_management"
+              class="btn back langchange"
+              data-key="back"
+              >Back</a
+            >
+
+            {% comment %}
+            <a
+              href="#"
+              class="btn"
+              data-bs-toggle="modal"
+              data-bs-target="#delete"
+              >Delete Member</a
+            >
+            {% endcomment %}
+            <button
+              style="color: #e57373; border: 1px solid; outline: none"
+              type="button"
+              class="btn langchange"
+              data-key="deleteMember"
+              data-toggle="modal"
+              data-target="#id{{user.id}}"
+            >
+              Delete Member
+            </button>
+
+            <!------------------ Modal -------------------------->
+
+            <div class="modal fade" id="id{{user.id}}" role="dialog">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">
+                      <span style="color: #e80202; font-weight: 600"
+                        >{{ user.username }}</span
+                      >
+                    </h4>
+                  </div>
+                  <div class="modal-body" style="text-align: left">
+                    <p class="langchange" data-key="message4">
+                      Do you really want to delete the user?
+                    </p>
+                    <a
+                      style="
+                        text-decoration: none;
+                        padding: 6px 10px;
+                        background: #e57373;
+                        color: white;
+                        border-radius: 10px;
+                      "
+                      class="langchange"
+                      data-key="delete"
+                      href="{% url '/delete-user' user.id %}"
+                      >Delete</a
+                    >
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-default langchange"
+                      data-key="modal_Close"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- button part end -->
+    </div>
+  </div>
+</section>
+<!-- member-information-detail part end -->
+
+{% block js %}
+<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}
+<!-- jquery file -->
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock%}

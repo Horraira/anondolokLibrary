@@ -1,0 +1,184 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>Member Management</title> {% endblock%} {% block content %}
+<!-- -------------------------------------- Member Management section -------------------------------------------- -->
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="MM_title"
+    >
+      Member Management
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">Lang EN</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+<hr />
+<table id="printTable" class="display" style="width: 100%; text-align: center">
+  <thead>
+    <tr>
+      <th class="langchange" data-key="serial">SL</th>
+      <th class="langchange" data-key="mmTh2">Name</th>
+      <th class="langchange" data-key="mmTh3">Phone Number</th>
+      <th class="langchange" data-key="mmTh4">Email</th>
+      <th class="langchange" data-key="profile">Action</th>
+      <th class="langchange" data-key="status">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for foo in context %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ foo.user.username }}</td>
+      <td>{{ foo.user.last_name }}</td>
+      <td>{{ foo.user.email }}</td>
+      <td><a href="{% url 'member-info' foo.user.id %}">View Details</a></td>
+      <td>
+        {% if foo.verification_status == 1 %}
+        <h3 style="font-size: large; font-weight: 600; color: #28a745"
+            class="langchange"
+            data-key="verified"
+        >
+          Verified
+        </h3>
+        {% elif foo.verification_status == 2 %}
+        <button
+                type="button"
+                data-toggle="modal"
+                data-target="#id{{foo.user.id}}"
+                class="btn btn-success langchange"
+                data-key="verify">
+
+        </button>
+            <!-- First Modal -->
+        <div class="modal fade" id="id{{foo.user.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ foo.user.username }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                  <h2>Payment System</h2>
+                  <a href="{% url '/cash-payment' foo.user.id %}" class="btn btn-outline-dark m-2">CASH</a>
+                  <form action="{% url '/bKash-payment' foo.user.id %}" method="post">
+                      {% csrf_token %}
+                      <input type="text" name="TrxID" placeholder="TrxID" required>
+                      <button type="submit" class="btn btn-outline-dark m-2"> bKash </button>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+            <!-- First Modal end -->
+
+
+        <a
+          class="btn btn-danger langchange"
+          href="{% url '/verification-denied' foo.user.id %}"
+          data-key="deny"
+          >Deny</a
+        >
+        {% elif foo.verification_status == 3 %}
+        <h3
+          style="font-size: large; font-weight: 600; color: #dc3545"
+          class="langchange"
+          data-key="denied"
+        >
+          Denied
+        </h3>
+        {% elif foo.verification_status == 0 %}
+        <h3 style="font-size: large; font-weight: 600; color: #dc3545"
+            class="langchange"
+            data-key="notVerified"
+        >
+          Not Verified
+        </h3>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+
+
+
+
+<button
+  id="button-a"
+  style="
+    border: 1px solid;
+    padding: 10px;
+    color: white;
+    background: #009879;
+    border-radius: 15px;
+  "
+  class="langchange"
+  data-key="createExcel"
+>
+  Create Excel
+</button>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#printTable").DataTable();
+  });
+</script>
+
+<!-- -------------------------------------- Download table as .xlsx file section -------------------------------------------- -->
+<script>
+  {#sheet tutorial https://redstapler.co/sheetjs-tutorial-html-table-to-excel/#}
+
+      var wb = XLSX.utils.table_to_book(document.getElementById('printTable'), {sheet:"Sheet JS"});
+      var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+      function s2ab(s) {
+                      var buf = new ArrayBuffer(s.length);
+                      var view = new Uint8Array(buf);
+                      for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                      return buf;
+      }
+      $("#button-a").click(function(){
+      saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
+      });
+</script>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock%}

@@ -1,0 +1,50 @@
+{% extends 'nav_base.html' %}
+{% load static %}
+
+{% block title %}
+<title>About Us</title>
+{% endblock %}
+
+{% block cssLink %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}" />
+<link rel="stylesheet" href="{% static 'css/aboutUs.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<!-- --------------------------- terms and conditions section ------------------------------ -->
+
+<div class="main-border">
+  <section>
+    <div class="title">
+        <h3 style="text-align: center" class="langchange" data-key="message39">আমাদের কথা</h3>
+    </div>
+      <hr>
+
+        <!-- Photo Grid -->
+    <div class="row">
+      <div class="column">
+        <img src="./static/images/about01.jpeg" style="width:100%">
+      </div>
+      <div class="column">
+        <img src="./static/images/about02.jpeg" style="width:100%">
+      </div>
+    </div>
+
+       <!-- about us content -->
+    <div class="aboutUs" style="text-align: justify; padding: 25px 0 0 0;">
+        <p class="langchange" data-key="message40">
+            "নিজাম ও বই" গ্রন্থাগারটি "আনন্দলোক" স্কুলের সহযোগী প্রতিষ্ঠান। গ্রন্থাগারটি প্রতিষ্ঠার পেছনে আমাদের প্রধান উদ্দেশ্য ছিল আনন্দলোকের
+            প্রথম অধ্যক্ষ নিজাম ভাই যিনি খুব অল্প সময়ের মধ্যে আমাদের ছেড়ে চলে গিয়েছেন, তাঁর স্মৃতিকে ধরে রাখা। নিজাম ভাই অসম্ভব বৈপ্লবিক মানুষ
+            ছিলেন এবং চাইতেন বাচ্চারা বই পড়ুক। বর্তমান সময়ের প্রেক্ষাপটে বই পড়ার অভ্যাস সমাজের মধ্যে বিশেষ করে বাচ্চাদের মধ্যে ছড়িয়ে দেয়া এবং ধরে
+            রাখার অসম্ভব প্রয়োজনীয়তা রয়েছে। নিজাম ভাই যেহেতু বই অনেক পছন্দ করতেন তাই তাঁর স্মৃতিকে ধরে রাখার পাশাপাশি এই উদ্যোগটি দিয়ে
+            "আনন্দলোক" স্কুল সমাজের মধ্যে বাচ্চাদের এবং সেই সাথে বড়দের বই পড়ার অভ্যাস গড়ে তুলতে চায়। "নিজাম ও বই" গ্রন্থাগারের মাধ্যমে আমরা
+            চারিদিকে বইয়ের আলো ছড়িয়ে দিতে চাই।
+        </p>
+    </div>
+  </section>
+</div>
+
+<!-- --------------------------------------------- end - terms and conditions section -->
+
+{% endblock %}

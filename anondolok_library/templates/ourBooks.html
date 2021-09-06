@@ -1,0 +1,95 @@
+{% extends 'nav_base.html' %} {% load static %}
+
+{% block title %}
+<title>All Books </title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock%}
+
+
+{% block content %}
+<style>
+  @media screen and (min-width: 768px) {
+    .col-md-3 {
+      max-width: 50%;
+    }
+  }
+
+  * {
+    font-family: Poppins;
+  }
+  div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 200px;
+    margin: 15px auto;
+  }
+
+  div.gallery:hover {
+    border: 1px solid #777;
+  }
+
+  div.gallery img {
+    width: 100%;
+    padding: 5px;
+    height: 200px;
+  }
+
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
+</style>
+<!-- -------------------------------------- all books section -------------------------------------------- -->
+<section class="all_books">
+  <div class="container">
+    <div style="text-align: right">
+        <form action="unAuthSearch" method="POST">
+            {% csrf_token %}
+            <input type="text" name="searched">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div id="html-item-pagination" class="row">
+      {% for book in books %}
+
+      <div class="gallery hip-item">
+          <img
+            src="{{ book.cover_photo.url }}"
+            alt="Cinque Terre"
+            width="600"
+            height="400"
+          />
+        <div class="desc">
+          <span style="color: #a4a4a4">Book Name :</span> {{ book.book_name }}
+          <br />
+
+          <span style="color: #a4a4a4">Writer :</span> {{ book.author_name }}
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  $(document).ready(function () {
+    $("#html-item-pagination").hip({
+      itemsPerPage: 15,
+      itemsPerRow: 3,
+      itemGaps: "20px",
+      paginationPos: "left",
+    });
+  });
+</script>
+<script type="text/javascript" src="{% static 'js/hip.js' %}"></script>
+
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock%}

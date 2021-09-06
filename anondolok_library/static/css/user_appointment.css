@@ -1,0 +1,67 @@
+.main-section{
+    border: 1px solid #FFFFFF;
+    width: 1410px;
+    height: 785px;
+    box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    margin: 15px;
+}
+.textStyle{
+ font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+color: #3D3D3D;
+}
+.messageDiv{
+    border: 1px solid #FFFFFF;
+    box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);
+    height: 300px;
+    overflow: scroll;
+}
+.messageTextStyle{
+    font-family: Roboto;
+    font-weight: bold;
+}
+
+.appointmentDiv{
+    border: 1px solid #FFFFFF;
+    box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);
+    height: 300px;
+}
+
+.btnStyle1{
+width: 114px;
+height: 40px;
+background: #FFFFFF;
+border: 1px solid #3D3D3D;
+box-sizing: border-box;
+border-radius: 5px;
+
+}
+
+.btnStyle2{
+width: 114px;
+height: 40px;
+background: #64B5F6;
+border-radius: 5px;
+}
+.btnDiv{
+    padding:5px;
+}
+@media only screen and (max-width:360px){
+    .btnDiv{
+        text-align: center !important;
+    }
+    .btnStyle1{
+        margin-bottom: 5px;
+    }
+}
+
+@media only screen and (max-width:375px){
+    .btnDiv{
+        text-align: center !important;
+    }
+    .btnStyle1{
+        margin-bottom: 5px;
+    }
+}

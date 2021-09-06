@@ -1,0 +1,117 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>Messages</title> {% endblock%} {% block content %}
+<!-- -------------------------------------- Show messages section -------------------------------------------- -->
+
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="mrTitle"
+    >
+      Message requests
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">English</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+<hr />
+<table id="printTable" class="display" style="width: 100%; text-align: center">
+  <thead>
+    <tr>
+      <th class="langchange" data-key="serial">SL</th>
+      <th class="langchange" data-key="name">Name</th>
+      <th class="langchange" data-key="phone">Phone</th>
+      <th class="langchange" data-key="email">Email</th>
+      <th class="langchange" data-key="message">Message</th>
+      <th class="langchange" data-key="reply">Reply</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for text in messages %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ text.c_name }}</td>
+      <td>{{ text.c_phone }}</td>
+      <td>{{ text.c_mail }}</td>
+      <td>{{ text.c_message }}</td>
+      <td>
+        <a href="mailto: {{ text.c_mail }}"
+          ><i class="fas fa-envelope" style="font-size: 20px"></i
+        ></a>
+      </td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+<button
+  id="button-a"
+  style="
+    border: 1px solid;
+    padding: 10px;
+    color: white;
+    background: #009879;
+    border-radius: 15px;
+  "
+  class="langchange"
+  data-key="createExcel"
+>
+  Create Excel
+</button>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#printTable").DataTable();
+  });
+</script>
+
+<!-- -------------------------------------- Download table as .xlsx file section -------------------------------------------- -->
+<script>
+  {#sheet tutorial https://redstapler.co/sheetjs-tutorial-html-table-to-excel/#}
+
+      var wb = XLSX.utils.table_to_book(document.getElementById('printTable'), {sheet:"Sheet JS"});
+      var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+      function s2ab(s) {
+                      var buf = new ArrayBuffer(s.length);
+                      var view = new Uint8Array(buf);
+                      for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                      return buf;
+      }
+      $("#button-a").click(function(){
+      saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
+      });
+</script>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock%}

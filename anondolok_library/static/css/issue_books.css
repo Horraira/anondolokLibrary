@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.image-border {
+  border: 1px solid;
+    display: inline-block;
+    text-align: center;
+    margin-left: 45%;
+}
+
+.borrow-id{
+  margin-left: 35%;
+  margin-right: 30%;
+  margin-bottom: 10px;
+  margin-top: 12px;
+}
+
+.confirm-book-id{
+  margin-left: 35%;
+  margin-right: 30%;
+  margin-bottom: 10px;
+  margin-top: 12px;
+}
+
+.book-info-right {
+  margin-left: 48%;
+}
+
+.book-info-left {
+  margin-left: 20%;
+}
+
+.col-md-6 {
+  float: right;
+}
+
+
+/*#zero_margin_padding {*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+
+/*.book-issue-content {*/
+/*  padding: 15px;*/
+/*  background: #ffffff;*/
+/*  box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);*/
+/*}*/
+
+/*.book-issue-content--text {*/
+/*  font-family: "Roboto";*/
+/*  font-style: normal;*/
+/*  font-weight: bold;*/
+/*  font-size: 36px;*/
+/*  line-height: 42px;*/
+/*  margin-left: 27px;*/
+/*  color: #3d3d3d;*/
+/*}*/
+
+.action-buttons {
+  padding: 15px;
+  text-align: right;
+  margin-top: 20px;
+}
+
+.action-buttons button {
+  margin-left: 5px;
+  width: 120px;
+  height: 40px;
+  padding: 5px;
+  font-family: "Roboto";
+}
+
+.cancel-button {
+  background-color: #ffffff;
+  color: black;
+  border: 1px solid #3d3d3d;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.scan-button {
+  background-color: #64b5f6;
+  color: white;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+}
+
+.issue-button {
+  background-color: #81c784;
+  color: white;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+}
+
+/*.input-types {*/
+/*  margin-top: 5%;*/
+/*}*/
+
+/*label {*/
+/*  font-family: "Roboto";*/
+/*}*/
+
+/*@media screen and (max-width: 600px) {*/
+/*  .action-buttons {*/
+/*    display: grid;*/
+/*    text-align: center;*/
+/*  }*/
+
+  .action-buttons button {
+    width: 13%;
+    margin-top: 8px;
+  }

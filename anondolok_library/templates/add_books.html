@@ -1,0 +1,427 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>Add Books</title> {% endblock%} {% block content %}
+<!-- -------------------------------------- Add books section -------------------------------------------- -->
+
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="addBook_title"
+    >
+      ...
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">English</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+
+<hr />
+<section class="add-books-section">
+  <h3 class="add-books-title-text langchange" data-key="addBook_title2">
+    Add Books
+  </h3>
+
+  <!-- --------------------------- form -------------------------- -->
+
+  <form
+    action="add_books"
+    method="POST"
+    enctype="multipart/form-data"
+    class="form-margin-padding"
+  >
+    {% csrf_token %}
+    <div class="row row-zero-margin-padding">
+      <div class="col-lg-8 col-md-7">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label1"
+                >...</label
+              >
+              <input
+                type="text"
+                name="book_name"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label2"
+                >Author Name</label
+              >
+              <input
+                type="text"
+                name="author_name"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label
+                for="exampleFormControlSelect1"
+                class="langchange"
+                data-key="label3"
+                >Category</label
+              >
+              <select
+                name="category"
+                class="form-control"
+                required
+                id="exampleFormControlSelect1"
+              >
+                <option>--- Select ---</option>
+                <option value="অনুবাদ/Translation">অনুবাদ/Translation</option>
+                <option value="অভিধান/Dictionary">অভিধান/Dictionary</option>
+                <option value="ইতিহাস_ও_ঐতিহ্য/History_&_Tradition ">ইতিহাস ও ঐতিহ্য/History & Tradition </option>
+                <option value="ম্যাগাজিন/Magazine">ম্যাগাজিন/Magazine</option>
+                <option value="উপন্যাস/Novel">উপন্যাস/Novel</option>
+                <option value="কবিতা/Poem">কবিতা/Poem</option>
+                <option value="গণিত_ও_বিজ্ঞান/Math_&_Science ">গণিত ও বিজ্ঞান/Math & Science </option>
+                <option value="গল্প/Story">গল্প/Story</option>
+                <option value="জীবনী/Biography">জীবনী/Biography </option>
+                <option value="ধর্ম/Religion">ধর্ম/Religion</option>
+                <option value="প্রবন্ধ/Article ">প্রবন্ধ/Article </option>
+                <option value="ভ্রমণ/Travel ">ভ্রমণ/Travel </option>
+                <option value="মুক্তিযুদ্ধ_কর্ণার/Liberation_War_Corner">মুক্তিযুদ্ধ কর্ণার/Liberation War Corner</option>
+                <option value="বঙ্গবন্ধু_কর্ণার/BangabandhuCorner ">বঙ্গবন্ধু কর্ণার/Bangabandhu Corner </option>
+                <option value="শিশু_কর্ণার/ChildCorner ">শিশু কর্ণার/Child Corner </option>
+                <option value="রচনা_সমগ্র/Anthology">রচনা সমগ্র/Anthology </option>
+                <option value="সায়েন্স_ফিকশন/ScienceFiction">সায়েন্স ফিকশন/Science Fiction</option>
+                <option value="ইংরেজি/English">ইংরেজি/English</option>
+              </select>
+            </div>
+
+            {% comment %} {#
+            <div class="form-group">
+              #} {# <label for="exampleInputEmail1" class="">Category</label>#}
+              {#
+              <input#}
+                {#
+                type="text"
+                #}
+                {#
+                name="category"
+                #}
+                {#
+                class="form-control"
+                #}
+                {#
+                id="exampleInputEmail1"
+                #}
+                {#
+                placeholder=""
+                #}
+                {#
+              />#} {#
+            </div>
+            #} {% endcomment %}
+
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label4"
+                >Pages</label
+              >
+              <input
+                name="pages"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+                type="Number"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label
+                for="exampleFormControlSelect1"
+                class="langchange"
+                data-key="label5"
+                >Language</label
+              >
+              <select
+                name="language"
+                class="form-control"
+                id="exampleFormControlSelect1"
+              >
+                <option>--- Select ---</option>
+                <option value="Bangla">Bangla</option>
+                <option value="English">English</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label6"
+                >Price</label
+              >
+              <input
+                type="Number"
+                name="price"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+                required
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label7"
+                >ISBN Number</label
+              >
+              <input
+                name="isbn_number"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+                type="Number"
+              />
+            </div>
+
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label8"
+                >DOI Number</label
+              >
+              <input
+                name="doi_number"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+                type="Number"
+              />
+            </div>
+
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label9"
+                >Accession Number</label
+              >
+              <input
+                name="accession_number"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+                type="Number"
+              />
+            </div>
+
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label10"
+                >Publisher Name</label
+              >
+              <input
+                type="text"
+                name="publisher_name"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label11"
+                >Publication Date</label
+              >
+              <input
+                type="date"
+                name="publisher_date"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+              />
+            </div>
+
+            <div class="form-group">
+              <label
+                for="exampleInputEmail1"
+                class="langchange"
+                data-key="label12"
+                >Shelf Number</label
+              >
+              <input
+                name="shelf_number"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder=""
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label
+                for="exampleFormControlTextarea1"
+                class="langchange"
+                data-key="label13"
+                >Description</label
+              >
+              <textarea
+                class="form-control"
+                name="description"
+                id="exampleFormControlTextarea1"
+                rows="3"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-5">
+        <div class="row row-zero-margin-padding">
+          <div class="col-md-12">
+            <div class="grid-right">
+              <!-- ------- add books image layout------- -->
+              <style>
+                .add-books-div img {
+                  height: 200px;
+                }
+              </style>
+              <div class="add-books-div" id="img_preview"></div>
+              <div class="choose-image-file-div">
+                <input
+                  type="file"
+                  name="cover_photo"
+                  id="upload_imgs"
+                  class="choose-image-file-button"
+                />
+              </div>
+              <!-- ---------end - add books image layout -->
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="grid-right">
+              <div class="publish_online_and_book_button">
+                <h3
+                  style="text-align: center; margin-top: 15px; color: #e91e63"
+                >
+                  {{ e }}
+                </h3>
+                {% for message in messages %}
+                <h3 style="margin-top: 15px; color: #e91e63">{{ message }}</h3>
+                {% endfor %}
+                <button
+                  class="add-book-button langchange"
+                  data-key="add_book"
+                  type="submit"
+                >
+                  Add Book
+                </button>
+                <button
+                  class="add-book-button langchange btn-danger"
+                  onClick="window.location.reload();"
+                  data-key="cancel"
+                  type="reset"
+                >
+                  cancel
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- -------------------------- end - publish online and add books section -->
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- ---------------------------------------------------- end form -->
+</section>
+<!-- ----------------------------------------------------------------------------- end - Add books section -->
+
+<!--  image upload Script  -->
+<script type="text/javascript">
+  var imgUpload = document.getElementById("upload_imgs"),
+    imgPreview = document.getElementById("img_preview"),
+    //, imgUploadForm = document.getElementById('img-upload-form')
+    totalFiles,
+    //, previewTitle
+    //, previewTitleText
+    img;
+
+  imgUpload.addEventListener("change", previewImgs, false);
+  //imgUploadForm.addEventListener('submit', function (e) {
+  //  e.preventDefault();
+  //  alert('Images Uploaded! (not really, but it would if this was on your website)');
+  // }, false);
+
+  function previewImgs(event) {
+    totalFiles = imgUpload.files.length;
+
+    if (!!totalFiles) {
+      imgPreview.classList.remove("quote-imgs-thumbs--hidden");
+      previewTitle = document.createElement("p");
+      previewTitle.style.fontWeight = "bold";
+      //previewTitleText = document.createTextNode(totalFiles + ' ');
+      //previewTitle.appendChild(previewTitleText);
+      imgPreview.appendChild(previewTitle);
+    }
+
+    for (var i = 0; i < totalFiles; i++) {
+      img = document.createElement("img");
+      img.src = URL.createObjectURL(event.target.files[i]);
+      img.classList.add("img-preview-thumb");
+      imgPreview.appendChild(img);
+    }
+  }
+</script>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock%}

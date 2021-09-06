@@ -1,0 +1,142 @@
+{% extends 'admin_side_menu.html' %}
+{% load static %}
+
+	{% block title %}
+        <title>Book Details</title>
+    {% endblock%}
+
+    {% block link %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/book_info.css' %}" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    {% endblock%}
+
+{% block content %}
+
+<!-- -------------------------------------- Add books section -------------------------------------------- -->
+ <h5 style="text-align: center; color: #009879;
+    font-size: xx-large;" >Book Information</h5>
+    <hr>
+    <!-- book-information part start -->
+    <section class="book-information ">
+        <div class="container" style="margin: 0; padding: 0;" >
+            <div class="book-information-all w-100 shadow mx-auto ps-3 pt-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="book-information-header ps-4 pb-5">
+                            <h3>Book Information</h3>
+                        </div>
+                    </div>
+                    <!-- book name and author part start -->
+                    <div class="col-md-8 col-sm-12">
+
+                        <div class="book-name-information">
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">Book ID</li>
+                                    <li>{{ book.id }}</li>
+                                </ul>
+                                </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">Book Name</li>
+                                    <li>{{ book.book_name }}</li>
+                                </ul>
+                                </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">Author Name</li>
+                                    <li>{{ book.author_name }}</li>
+                                </ul>
+                            </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">Genre</li>
+                                    <li>{{ book.category }}</li>
+                                </ul>
+                            </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">pages</li>
+                                    <li>{{ book.book_pages }}</li>
+                                </ul>
+                            </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">Price</li>
+                                    <li>{{ book.price }}Tk</li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="book-name-information pe-3">
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">ISBN Number</li>
+                                    <li>{{ book.isbn_number }}</li>
+                                </ul>
+                            </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">DOI Number</li>
+                                    <li>{{ book.doi_number }}</li>
+                                </ul>
+                            </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">Accession Number</li>
+                                    <li>{{ book.accession_number }}</li>
+                                </ul>
+                            </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">Publisher Name</li>
+                                    <li>{{ book.publisher_name }}</li>
+                                </ul>
+                            </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">Publication Date</   li>
+                                    <li>{{ book.publisher_date }}</li>
+                                </ul>
+                            </div>
+                            <div class="book-author">
+                                <ul>
+                                    <li class="nameOfTheBook">Shelf Number</li>
+                                    <li>{{ book.shelf_number }}</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- book name and author part end -->
+
+                    <!-- book image part start -->
+                    <div class="col-md-4 col-sm-12">
+                        <div class="book-img mb-2">
+                            <img src="{{ book.cover_photo.url }}" alt="" class="border p-2" style="width: 200px">
+                        </div>
+                        <div class="cover">
+{#                            <a href=""class="btn btn-lg">View Cover</a>#}
+                        </div>
+
+                    </div>
+                    <!-- book image part end -->
+
+                    <!-- book description start -->
+                    <div class="col-12">
+                        <div class="book-author">
+                            <ul>
+                                <li class="bookDescription">Description</li>
+                                <li class="all-description">{{ book.description }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- book description end -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- book information part end -->
+
+{% endblock%}

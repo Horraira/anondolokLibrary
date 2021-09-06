@@ -1,0 +1,91 @@
+
+li{
+    list-style: none;
+}
+*{
+    font-family: 'Roboto', sans-serif;
+}
+body,html{
+    width:100%;
+    height:100%;
+    /*overflow:hidden;*/
+    margin:0px;
+    padding:0px;
+}
+/*book-information part start  */
+.book-information .book-information-all .all{
+    /* width:100%; */
+    border:1px solid red;
+    /* height:500px; */
+}
+.book-information .book-information-all .book-information-header h3{
+    color:#3D3D3D;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+}
+/* book name and author part start */
+
+.book-name-information{
+    width:50%;
+    float:left;
+    font-size: 18px;
+
+}
+
+.book-name-information .book-author .nameOfTheBook{
+    color: #A4A4A4;
+
+}
+/*book name and author part end*/
+
+.book-information .book-information-all .cover a{
+    background: #DDDDDD;
+    color: black;
+    border-radius: 0px;
+    padding: 3px 46px;
+    font-size: 14px;
+    border:1px solid black;
+}
+/* book description part start */
+.book-information .book-information-all .book-author .bookDescription{
+    color: #A4A4A4;
+    font-size: 18px;
+}
+.book-information .book-information-all .book-author .all-description{
+    width:57%;
+    font-size: 18px;
+}
+/* book description part start */
+
+@media screen and (max-width: 992px) {
+    .book-information .book-information-all .book-img img{
+        display:block;
+        margin:50px auto;
+        border:1px solid #868686
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .book-information .book-information-all .book-author .all-description{
+        width:100%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .book-information .book-information-all .cover a{
+        display: table;
+        margin: -21px auto 24px auto;
+    }
+}
+@media screen and (max-width: 992px) {
+    .book-information .book-information-all .book-name-information{
+        width: 46%;
+        float: left;
+        font-size: 12px;
+    }
+}
+
+
+/* book-information part end */

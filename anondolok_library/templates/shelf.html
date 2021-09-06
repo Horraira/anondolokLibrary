@@ -1,0 +1,232 @@
+{% extends 'user_side_menu.html' %}
+{% load static %}
+
+	{% block title %}
+        <title>My Shelf</title>
+    {% endblock%}
+
+    {% block cssLink %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/all_books.css' %}" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% endblock%}
+    {% block profile %}
+        <div class="admin-profile">
+            <div class="profile">
+                {% if checkUser.is_verified %}
+              <i class="far fa-user-circle"></i>
+                {% else %}
+              <i class="fas fa-user-times"></i>
+                {% endif %}
+              <div class="name">
+                <h3> {{ request.user }} </h3>
+              </div>
+            </div>
+        </div>
+    {% endblock %}
+
+{% block content %}
+
+<!-- -------------------------------------- my shelf style -------------------------------------------- -->
+
+    <style>
+        @media screen and (min-width: 768px) {
+            .col-md-3{
+                max-width: 50%;
+            }
+        }
+        * {
+          font-family: Poppins;
+        }
+        /* Tabs Start */
+
+        .container {
+            width: 100%;
+            {#max-width: 1000px;#}
+            margin: 0 auto;
+        }
+
+        .tabs {
+            background: #fff;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .tabs > input,
+        .tabs > span {
+            width: 33.3%;
+            height: 60px;
+            line-height: 60px;
+            position: absolute;
+            top: 0;
+        }
+
+        .tabs > input {
+            cursor: pointer;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            position: absolute;
+            z-index: 99;
+        }
+
+        .tabs > span {
+            background: #f0f0f0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .tabs > span i,
+        .tabs > span {
+            -webkit-transition: all .5s;
+               -moz-transition: all .5s;
+                 -o-transition: all .5s;
+                    transition: all .5s;
+        }
+
+        .tabs > input:hover + span {
+            background: rgba(255,255,255,.1);
+        }
+
+        .tabs > input:checked + span {
+            background: #fff;
+        }
+
+        .tabs > input:checked + span,
+        .tabs > input:hover + span {
+            color: #3498DB;
+        }
+
+        #tab-1, #tab-1 + span {
+            left: 0;
+        }
+
+        #tab-2, #tab-2 + span {
+            left: 33.3%;
+        }
+
+        #tab-3, #tab-3 + span {
+            left: 66.6%;
+        }
+
+        .tab-content {
+            padding: 80px 20px 20px;
+            width: 100%;
+            min-height: 340px;
+        }
+
+        .tab-content section {
+            width: 100%;
+            display: none;
+        }
+
+
+        #tab-1:checked ~ .tab-content #tab-item-1  {
+            display: block;
+        }
+
+        #tab-2:checked ~ .tab-content #tab-item-2  {
+            display: block;
+        }
+
+        #tab-3:checked ~ .tab-content #tab-item-3  {
+            display: block;
+        }
+
+    </style>
+<!-- -------------------------------------- my shelf section -------------------------------------------- -->
+    <!-- language switch start -->
+    <div style="display: flex">
+        <div class="col-7" style="text-align: right">
+            <h5 style="color: #009879;
+            font-size: xx-large;" class="langchange" data-key="shelf" > ... </h5>
+        </div>
+        <div class="col-5 p-2" style="text-align: right">
+            <input type="radio" id="lang_en" name="lang" data-value="en" onchange="changeLang('en');"/>
+            <label for="lang_en">English</label>
+
+            <input type="radio" id="lang_ru" name="lang" data-value="ru" onchange="changeLang('ru');" />
+            <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px">বাংলা</label>
+        </div>
+    </div> <hr>
+    <!-- language switch end -->
+    <main class="container" style="margin: 0">
+      <section class="shadow mt-5">
+          <div class="container">
+            <div class="tabs effect-1">
+                <!-- tab-title -->
+                <input type="radio" id="tab-1" name="tab-effect-1" checked="checked">
+                <span class="langchange" data-key="CR">Currently Reading</span>
+
+                <input type="radio" id="tab-2" name="tab-effect-1">
+                <span class="langchange" data-key="AR">Already Read</span>
+
+                <input type="radio" id="tab-3" name="tab-effect-1">
+                <span class="langchange" data-key="WL">Wish List</span>
+
+                <!-- tab-content -->
+                <div class="tab-content">
+                    <!-- Currently reading section -->
+                    <section id="tab-item-1">
+                        <div class="row">
+                            {% for foo in reading %}
+                            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                              <div class="hip-item">
+                                  <figure>
+                                      <img src="{{ foo.book.cover_photo.url }}" alt="">
+                                      <figcaption>
+                                        <p><span style="color: #a4a4a4; ">Book Name :</span> {{ foo.book.book_name }}</p>
+                                        <p><span style="color: #a4a4a4; ">Writer :</span> {{ foo.book.author_name }}</p>
+                                      </figcaption>
+                                  </figure>
+                              </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section><!-- Currently reading section end -->
+                    <!-- Already read section -->
+                    <section id="tab-item-2">
+                        <div class="row">
+                            {% for foo in read %}
+                            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                              <div class="hip-item">
+                                  <figure>
+                                      <img src="{{ foo.book.cover_photo.url }}" alt="">
+                                      <figcaption>
+                                        <p><span style="color: #a4a4a4; ">Book Name :</span> {{ foo.book.book_name }}</p>
+                                        <p><span style="color: #a4a4a4; ">Writer :</span> {{ foo.book.author_name }}</p>
+                                      </figcaption>
+                                  </figure>
+                              </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section> <!-- Already read section end -->
+                    <!-- Favourite books section -->
+                    <section id="tab-item-3">
+                        <div class="row">
+                            <h3 style="text-align: center; color: red; margin-top: 15px;">{{ e }}</h3>
+                            {% for foo in wishList %}
+                            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                              <div class="hip-item">
+                                  <figure>
+                                      <img src="{{ foo.book.cover_photo.url }}" alt="">
+                                      <figcaption>
+                                        <p><span style="color: #a4a4a4; ">Book Name :</span> {{ foo.book.book_name }}</p>
+                                        <p><span style="color: #a4a4a4; ">Writer :</span> {{ foo.book.author_name }}</p>
+                                      </figcaption>
+                                  </figure>
+                              </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                    <!-- Favourite books section end -->
+                </div>
+            </div>
+          </div>
+      </section>
+    </main>
+
+
+    <!--  Language Script  -->
+    <script type="text/javascript" src="{% static 'js/language_trans.js' %}"></script>
+{% endblock%}

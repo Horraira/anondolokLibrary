@@ -1,0 +1,106 @@
+{% extends 'user_side_menu.html' %}
+{% load static %}
+{% load humanize %}
+
+	{% block title %}
+        <title>Appointment</title>
+    {% endblock%}
+
+    {% block cssLink %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/user_appointment.css' %}" />
+    {% endblock%}
+
+    {% block profile %}
+        <div class="admin-profile">
+            <div class="profile">
+                {% if checkUser.is_verified %}
+              <i class="far fa-user-circle"></i>
+                {% else %}
+              <i class="fas fa-user-times"></i>
+                {% endif %}
+              <div class="name">
+                <h3> {{ request.user }} </h3>
+              </div>
+            </div>
+        </div>
+    {% endblock %}
+
+{% block content %}
+    <style>
+        * {
+          font-family: Poppins;
+        }
+    </style>
+<!-- -------------------------------------- Add books section -------------------------------------------- -->
+    <!-- language switch start -->
+    <div style="display: flex">
+        <div class="col-7" style="text-align: right">
+            <h5 style="color: #009879;
+            font-size: xx-large;" class="langchange" data-key="appointments" > Appointments </h5>
+        </div>
+        <div class="col-5 p-2" style="text-align: right">
+            <input type="radio" id="lang_en" name="lang" data-value="en" onchange="changeLang('en');"/>
+            <label for="lang_en">English</label>
+
+            <input type="radio" id="lang_ru" name="lang" data-value="ru" onchange="changeLang('ru');" />
+            <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px">বাংলা</label>
+        </div>
+    </div> <hr>
+    <!-- language switch end -->
+    <section class="d-flex justify-content-center align-items-center ">
+        <main class="main-section">
+            <h3 style="margin-bottom: 20px;" class="textStyle langchange" data-key="appointments">Appointments</h3>
+            <h4 style="color: #64B5F6;font-weight: bold;" class="langchange" data-key="inbox">Inbox</h4>
+
+            <section class="messageDiv">
+{#                {% if appointments.length > 0 %}#}
+                    {% for appointment in appointments %}
+                    <div class="d-flex justify-content-between p-2">
+                    {% if appointment.check_approve == 1 %}
+                        <p class="messageTextStyle langchange" data-key="message10">Your Appoinment Request is Approved.</p>
+                        <p style="color: #0cde0c" class="messageTextStyle">{{ appointment.requested_time|time:"H:i a" }}  -  {{ appointment.requested_date }}</p>
+                    {% elif appointment.check_approve == 2 %}
+                        <p class="messageTextStyle langchange" data-key="message11">Your Appoinment Request is Pending.</p>
+                        <p style="color: dodgerblue" class="messageTextStyle">{{ appointment.requested_time|time:"H:i a" }}  -  {{ appointment.requested_date }}</p>
+                    {% else %}
+                        <p class="messageTextStyle langchange" data-key="message12">Your Appoinment Request is Denied.</p>
+                        <p style="color: red" class="messageTextStyle">{{ appointment.requested_time|time:"H:i a" }}  -  {{ appointment.requested_date }}</p>
+                    {% endif %}
+                    </div>
+                    {% endfor %}
+{#                {% else %}#}
+{#                    <h3 style="text-align: center; margin-top: 10%;">You have no appointments</h3>#}
+{#                {% endif %}#}
+            </section>
+
+            <h3 style="color: #64B5F6;font-weight:bold; margin-top:30px; margin-bottom:10px;"  class="langchange" data-key="newAppointments">New Appointment</h3>
+
+            <section  class="appointmentDiv p-5">
+                <form action="user_appointment" method="POST">
+                    {% csrf_token %}
+                    <label for="">Date: </label> <input name="date" style="border: 1px solid; padding: 2px 5px;" type="date"/><br><br>
+                    <label for="">Time: </label> <input name="time" id="time" type="time" style="border: 1px solid; padding: 2px 5px;" />
+
+                    {% for message in messages %}
+                        <h3 style=" text-align: center; margin-top: 15px; color: #E91E63;">
+                            {{ message }}
+                        </h3>
+                   {% endfor %}
+
+                  <div class="mt-5 d-flex justify-content-end">
+                      <div class="btnDiv">
+                          <button class="btnStyle1 langchange" data-key="cancel" type="reset">Cancle</button>
+                          <button class="btnStyle2">
+                              <span style="color:white;" class="langchange" data-key="send">Send</span>
+                          </button>
+                      </div>
+                  </div>
+                </form>
+
+            </section>
+        </main>
+    </section>
+
+    <!--  Language Script  -->
+    <script type="text/javascript" src="{% static 'js/language_trans.js' %}"></script>
+{% endblock%}

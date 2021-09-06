@@ -1,0 +1,98 @@
+{% extends 'user_side_menu.html' %}
+{% load static %}
+
+	{% block title %}
+        <title>All Books</title>
+    {% endblock%}
+
+    {% block cssLink %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/all_books.css' %}" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% endblock%}
+    {% block profile %}
+        <div class="admin-profile">
+            <div class="profile">
+                {% if checkUser.is_verified %}
+              <i class="far fa-user-circle"></i>
+                {% else %}
+              <i class="fas fa-user-times"></i>
+                {% endif %}
+              <div class="name">
+                <h3> {{ request.user }} </h3>
+              </div>
+            </div>
+        </div>
+    {% endblock %}
+
+{% block content %}
+    <style>
+        @media screen and (min-width: 768px) {
+            .col-md-3{
+                max-width: 50%;
+            }
+        }
+
+        * {
+          font-family: Poppins;
+        }
+    </style>
+<!-- -------------------------------------- Add books section -------------------------------------------- -->
+    <!-- language switch start -->
+    <div style="display: flex">
+        <div class="col-7" style="text-align: right">
+            <h5 style="color: #009879;
+            font-size: xx-large;" class="langchange" data-key="allBook_title" > ... </h5>
+        </div>
+        <div class="col-5 p-2" style="text-align: right">
+            <input type="radio" id="lang_en" name="lang" data-value="en" onchange="changeLang('en');"/>
+            <label for="lang_en">English</label>
+
+            <input type="radio" id="lang_ru" name="lang" data-value="ru" onchange="changeLang('ru');" />
+            <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px">বাংলা</label>
+        </div>
+    </div> <hr>
+    <!-- language switch end -->
+    <section class="all_books">
+        <div class="container">
+            <div id="html-item-pagination" class="row">
+                {% for book in books %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                  <div class="hip-item">
+                      <figure>
+                          <img src="{{ book.cover_photo.url }}" alt="">
+                          <figcaption>
+                            <p><span style="color: #a4a4a4; ">Book Name :</span> {{ book.book_name }}</p>
+                            <p><span style="color: #a4a4a4; ">Writer :</span> {{ book.author_name }}</p>
+                          </figcaption>
+                      </figure>
+
+                          <div class="edit_book">
+                            <a href="{% url '/book-info' book.id %}" class="langchange" data-key="allBook_th5">Show Details</a>
+                          </div>
+
+
+                  </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+
+
+<script>
+ $(document).ready(function () {
+   $("#html-item-pagination").hip({itemsPerPage:12,itemsPerRow:3,itemGaps:'20px',paginationPos:'left'});
+ });
+</script>
+
+    {% block script %}
+        <script type="text/javascript" src="{% static 'js/hip.js' %}"></script>
+    {% endblock%}
+
+    <!--  Language Script  -->
+    <script type="text/javascript" src="{% static 'js/language_trans.js' %}"></script>
+
+{% endblock%}

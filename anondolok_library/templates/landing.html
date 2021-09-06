@@ -1,0 +1,191 @@
+{% extends 'nav_base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Anondolok Library</title>
+{% endblock %}
+
+{% block cssLink %} {% endblock %}
+
+{% block content %}
+    <main>
+      <!-- --------------------------------- banner ------------------------------- -->
+
+
+    	<div class="container">
+    		<section>
+    			<div class="banner-image">
+				  <img src="./static/images/banner.png">
+				</div>
+    		</section>
+
+        <!-- ----------------------------------------------------------- end - banner -->
+
+
+        <!-- ------------------------------- section after banner ----------------------- -->
+    		<section>
+    			<div class="hero-image">
+				  <div class="hero-text1">
+				    <h1 style="font-size:50px; font-weight: 700; font-family: 'poppins';" >বই পড়ুন মনের দুয়ার খুলুন</h1>
+				    <p style="font-size: 27px; font-family: 'poppins';" >নিজাম ও বই লাইব্রেরিতে স্বাগতম!</p>
+				  </div>
+				</div>
+    		</section>
+
+        <!-- ------------------------------- end - section after banner ----------------- -->
+
+        <!-- ------------------------------ featured books slider ----------------------- -->
+
+        <!-- slider section -->
+            <section id="slider-section">
+              <h2 style="text-align: center; padding: 25px; color: #AF5B25; font-family: 'poppins';" class="langchange" data-key="popular">জনপ্রিয় বইসমূহ</h2>
+                <div class="slider-wrap">
+                  <div class="slide-container">
+                    <ul class="slides">
+                      <li>
+                        <div>
+                          <img src="./static/images/book1.png">
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <img src="./static/images/book2.png">
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <img src="./static/images/book3.png">
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <img src="./static/images/book4.jpg" >
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <img src="./static/images/book5.jpg">
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <img src="./static/images/book6.jpg">
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <img src="./static/images/book7.jpg">
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+              </div>
+
+            </section>
+        <!-- slider section end-->
+
+        <!-- ----------------------------------------------- end - featured books slider  -->
+
+        <!-- ----------------------------------------- section -------------------------- -->
+            <section>
+              <div class="section-2-img">
+              <div class="hero-text">
+                <h1 style="font-size:30px; color: black; font-family: 'poppins'; font-weight: 600;" class="langchange" data-key="message20">আনন্দলোকের সদস্য হতে আগ্রহী?</h1>
+{#                <p style="font-family: 'poppins';  color: black; font-size: 25px;" class="langchange" data-key="signup">সাইন আপ করুন।</p>#}
+{#                <button class="btn btn-success" style="font-family: 'poppins';">সাইন আপ</button>#}
+                <a href="login/register" class="btn btn-success langchange" data-key="signup" style="font-family: 'poppins';">সাইন আপ</a>
+              </div>
+            </div>
+            </section>
+
+        <!-- -------------------------------------------------------------- end - section  -->
+
+        <!-- ----------------------------------------- author section -------------------------- -->
+
+
+
+            <!-- slider section -->
+            <section id="author-section">
+              <h2 style="text-align: center; padding: 25px; color: #AF5B25; font-family: 'poppins'" class="langchange" data-key="pupolarWriter">জনপ্রিয় লেখকবৃন্দ</h2>
+                <div class="row" style="margin: 0; padding: 0;">
+                  <div class="col"></div>
+                  <div class="col-md-2">
+                    <div>
+                      <img src="./static/images/writer1.png" alt="" class="rounded-circle img-fluid" style="display: block; margin: auto; height: 150px;">
+                    </div>
+                    <div class="author-name-div">
+                      <p style="text-align: center; font-family: 'poppins'" class="langchange" data-key="author1">আর্নেস্ট হেমিংওয়ে</p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div>
+                      <img src="./static/images/writer2.png" alt="" class="rounded-circle img-fluid" style="display: block; margin: auto; height: 150px;">
+                    </div>
+                    <div class="author-name-div">
+                      <p style="text-align: center; font-family: 'poppins'" class="langchange" data-key="author2">মানিক বন্দ্যোপাধ্যায়</p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div>
+                      <img src="./static/images/writer3.png" alt="" class="rounded-circle img-fluid" style="display: block; margin: auto; height: 150px;">
+                    </div>
+                    <div class="author-name-div">
+                      <p style="text-align: center; font-family: 'poppins'" class="langchange" data-key="author3">রবীন্দ্রনাথ ঠাকুর</p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div>
+                      <img src="./static/images/writer4.png" alt="" class="rounded-circle img-fluid" style="display: block; margin: auto; height: 150px;">
+                    </div>
+                    <div class="author-name-div">
+                      <p style="text-align: center; font-family: 'poppins'" class="langchange" data-key="author4">ডেল কার্নেগী</p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div>
+                      <img src="./static/images/writer5.png" alt="" class="rounded-circle img-fluid" style="display: block; margin: auto; height: 150px;">
+                    </div>
+                    <div class="author-name-div">
+                      <p style="text-align: center; font-family: 'poppins'" class="langchange" data-key="author5">জে কে রাউলিং</p>
+                    </div>
+                  </div>
+                  <div class="col"></div>
+                </div>
+            </section>
+            <!-- slider section end-->
+       </div>
+    </main>
+        <!-- ------------------------------------------------------------- end - author section  -->
+
+    {% endblock %}
+
+
+
+    {% block script_src %}
+    <!-- ------------------------- slides ----------------------------- -->
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+      $slides = $(".slides");
+      $slides.bind("contentchanged", function () {
+        animate($slides);
+      });
+      animate($slides);
+    });
+
+    function animate($slides) {
+      var slidesLength = $slides.find("li").length;
+      if (slidesLength > 3) {
+        $slides.find("li:nth-last-child(-n+3)").clone().prependTo($slides);
+        $slides.addClass("animate");
+        $slides.css("animation-duration", slidesLength * 9 + "s");
+      }
+    }
+    </script>
+
+    <!-- ------------------------------------------------- end - slides -->
+    {% endblock %}

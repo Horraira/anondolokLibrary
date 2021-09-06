@@ -1,0 +1,323 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>admin dashboard</title> {% endblock%} {% block csslink %} {% endblock%}
+{% block content %}
+<!----------------------------------------------------- start total books report  ------------------------------------------------------------------->
+{% comment %} {#
+<h5
+  style="text-align: center; color: #009879;#}
+{#    font-size: xx-large;"
+>
+  Dashboard
+</h5>
+#} {% endcomment %}
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="dashboard_title"
+    >
+      Dashboard
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">English</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+
+<!-- language switch end -->
+<hr />
+<section class="grid">
+  <article>
+    <div class="books_report_pie">
+      <div class="pie_title" style="display: flex">
+        <h3 class="langchange" data-key="dashboard_title2">
+          Total books report
+        </h3>
+      </div>
+      <div class="pie" style="width: 240px; height: 240px">
+        <canvas id="layanan_subbagian_2"></canvas>
+      </div>
+    </div>
+  </article>
+  <!----------------------------------------------------- end total books report  ------------------------------------------------------------------->
+  <!----------------------------------------------------- start QR code section  ------------------------------------------------------------------->
+  {% comment %} {#
+  <article>
+    #} {#
+    <div class="qr_section">
+      #} {#
+      <div class="qr-image">
+        #} {#
+        <img src="../static/images/add_book.png" alt="" class="qr-image" />#} {#
+      </div>
+      #} {#
+      <div class="qr_button">
+        #} {# <button class="qr-scan-books-button">Scan Books</button>#} {#
+      </div>
+      #} {#
+    </div>
+    #} {#
+  </article>
+  #} {% endcomment %}
+  <!----------------------------------------------------- end QR code section  ------------------------------------------------------------------->
+
+  <!----------------------------------------------------- start QR code section with modal  ------------------------------------------------------------------->
+  <article>
+    <div class="qr_section">
+      <div class="qr-image">
+        <img src="../static/images/add_book.png" alt="" class="qr-image" />
+      </div>
+      <div class="qr_button">
+        <button
+          class="qr-scan-books-button langchange"
+          data-key="scan"
+          data-toggle="modal"
+          data-target="#myModal"
+        >
+          Scan Books
+        </button>
+        <h3 style="text-align: center; margin-top: 15px; color: #e91e63">
+          {{ e }}
+        </h3>
+      </div>
+    </div>
+
+    <!------------------- Modal -------------------------------->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <!----------------- Modal content------------------------->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              style="display: none"
+              type="button"
+              class="close"
+              data-dismiss="modal"
+            >
+              &times;
+            </button>
+            <h4
+              style="color: #70ac4d"
+              class="modal-title langchange"
+              data-key="modal_title"
+            >
+              Book ID
+            </h4>
+          </div>
+          <!----------------- Modal body------------------------->
+          <div class="modal-body">
+            <form action="scan_book" method="post">
+              {% csrf_token %}
+              <div>
+                <p class="langchange" data-key="modal_text">
+                  As the scanner machine is unavailable, you need to enter the
+                  book id below to continue the process.
+                </p>
+                <input
+                  class="form-control"
+                  type="text"
+                  required
+                  name="book_id"
+                />
+                <button
+                  class="btn btn-outline-success langchange"
+                  style="margin-top: 10px"
+                  type="submit"
+                  data-key="modal_submit"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-default langchange"
+              data-key="modal_Close"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <!----------------------------------------------------- end QR code section with modal ------------------------------------------------------------------->
+
+  <!----------------------------------------------------- Test demo start QR code section  ------------------------------------------------------------------->
+  {% comment %} {#
+  <article>
+    #} {#
+    <div class="scan_book">
+      #} {#
+      <form action="scan_book" method="post">
+        #} {# {% csrf_token %}#} {#
+        <div class="input-Bid">
+          #} {#
+          <input class="form-control" type="text" required name="book_id" />#}
+          {#
+          <button
+            class="btn btn-outline-success"
+            #}
+            {#
+            style="margin-top: 10px"
+            #}
+            {#
+            type="submit"
+          >
+            Submit#} {#</button
+          >#} {#
+          <h3 style="text-align: center; margin-top: 15px; color: #e91e63">
+            #} {# {{ e }}#} {#
+          </h3>
+          #} {#
+        </div>
+        #} {#
+      </form>
+      #} {#
+    </div>
+    #} {#
+  </article>
+  #} {% endcomment %}
+  <!----------------------------------------------------- Test demo end QR code section  ------------------------------------------------------------------->
+
+  <!----------------------------------------------------- start daily report  ------------------------------------------------------------------->
+  <article>
+    <div class="daily_report">
+      <div class="title" style="display: flex">
+        <h3 class="langchange" data-key="title3">Daily report</h3>
+      </div>
+
+      <div class="report">
+        <div class="row" style="padding-top: 5px; padding-bottom: 12px">
+          <div class="col">
+            <div class="main-div" style="background-color: #81c784">
+              <div class="text-color-and-type">
+                <p class="langchange" data-key="subtitle1">Total Books</p>
+                <p class="number-padding">{{ total_book }}</p>
+              </div>
+              <div>
+                <img
+                  class="img-margin-padding"
+                  src="../static/photos/vector.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="main-div" style="background: #64b5f6">
+              <div class="text-color-and-type">
+                <p class="langchange" data-key="subtitle2">Issued Books</p>
+                <p class="number-padding">{{ issued_book }}</p>
+              </div>
+              <div>
+                <img
+                  class="img-margin-padding"
+                  src="../static/photos/vector.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="main-div" style="background: #ffb74d">
+              <div class="text-color-and-type">
+                <p class="langchange" data-key="subtitle3">Books returned</p>
+                <p class="number-padding">{{ returned_book }}</p>
+              </div>
+              <div>
+                <img
+                  class="img-margin-padding"
+                  src="../static/photos/vector.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="main-div" style="background: #e57373">
+              <div class="text-color-and-type">
+                <p class="langchange" data-key="subtitle4">Books Lost</p>
+                <p class="number-padding">0</p>
+              </div>
+              <div>
+                <img
+                  class="img-margin-padding"
+                  src="../static/photos/vector.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+  <!----------------------------------------------------- end daily report  ------------------------------------------------------------------->
+</section>
+
+<!----------------------------------------------------- end body content  ------------------------------------------------------------------->
+
+<!-- --------------------------- Favourite Genere ---------------------------- -->
+<script>
+  var ctx_3 = document
+    .getElementById("layanan_subbagian_2")
+    .getContext("2d");
+  var data_3 = {
+    datasets: [
+      {
+        data: [{{ total_book }}, {{ issued_book }}, {{ returned_book }}],
+        backgroundColor: ["#9575CD", "#DCE775", "#F06292"],
+      },
+    ],
+    labels: ["Total Books", "Books Issued", "Books Returned"],
+  };
+  var myDoughnutChart_3 = new Chart(ctx_3, {
+    type: "pie",
+    data: data_3,
+    options: {
+      maintainAspectRatio: false,
+      legend: {
+        position: "bottom",
+        labels: {
+          boxWidth: 12,
+        },
+      },
+    },
+  });
+</script>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+<!-- ------------------------------------------ end - Favourite Genere  -->
+
+{% endblock %}

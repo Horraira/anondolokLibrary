@@ -1,0 +1,68 @@
+.icon-color{
+    color: #81C784;
+    font-size: 50px;
+}
+.headerDiv{
+    top:178px;
+}
+.headerText-style{
+    font-family:Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 42px;
+    color: #3D3D3D;
+
+}
+/*.headerDiv .headerText-style i{*/
+/*    position: absolute;*/
+/*    top: 14.8%;*/
+/*    left: 66%;*/
+/*}*/
+.headerDiv .headerText-style i{
+    position: absolute;
+    top: 124px;
+}
+.bookDiv{
+    border:1px solid #868686;
+    box-sizing:border-box;
+    width: 230px;
+    height: 297.22px;
+}
+
+.bookStyle{
+    width: 199.56px;
+    height: 282.78px;
+}
+
+.bookidDiv{font-family: Roboto;font-style: normal;font-weight: normal;/* font-size: 22px; *//* line-height: 26px; */text-align: center;color: #3D3D3D;}
+
+.booknameDiv{width: 230px;height: 145.22px;font-family: Roboto;font-style: normal;font-weight: normal;/* font-size: 22px; */line-height: 26px;color:#3D3D3D;}
+
+.btnClr{
+ background: #008CFD;
+ border-radius: 5px;
+ width: 244px;
+ height: 50px;
+}
+
+.btnText{
+ font-family: Roboto;
+ font-style: normal;
+ font-weight: 500;
+ font-size: 21px;
+ line-height: 26px;
+ text-align: center;
+ color: #FFFFFF;
+}
+ @media only screen and (max-width:360px){
+    .headerText-style{
+        font-family:Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 42px;
+        color: #3D3D3D;
+
+    }
+ }

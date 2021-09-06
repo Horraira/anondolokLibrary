@@ -1,0 +1,49 @@
+{% extends 'admin_side_menu.html' %}
+{% load static %}
+
+	{% block title %} <title></title> {% endblock%}
+
+
+{% block content %}
+<!-- -------------------------------------- Add books section -------------------------------------------- -->
+<section class="add-books-section">
+{#    <div class="d-flex justify-content-center headerDiv mt-1">#}
+{#            <p class="headerText-style">Book Issued Complete! <i class="far fa-check-circle  icon-color"></i></p>#}
+{#        </div>#}
+    <header>
+        <div class="d-flex justify-content-center headerDiv mt-1">
+            <p class="headerText-style">Book Issued Complete! <i class="far fa-check-circle  icon-color"></i></p>
+        </div>
+    </header>
+
+    <section class="d-flex justify-content-center mt-5">
+        <div class="bookDiv d-flex justify-content-center align-items-center">
+             <img src="{{ book.cover_photo.url }}" class="bookStyle" alt="">
+        </div>
+    </section>
+
+    <section class="bookidDiv mt-4">
+        <p>Borrower Username <br> {{ user_id }}</p>
+    </section>
+
+    <section class='d-flex justify-content-center'>
+        <div class="booknameDiv">
+            <div>
+                <p>Book Name <br> {{ book.book_name }} </p>
+            </div>
+            <div class='d-flex justify-content-between'>
+             <p>Issue Date <br><span style="color:#8C8888;">{{ issue_date }}</span></p>
+             <p>Due Date <br> <span style="color:#8C8888;">{{ due_date }}</span></p>
+            </div>
+        </div>
+    </section>
+
+        <section class='d-flex justify-content-center'>
+            <a href='issue_book_list'>
+                <button class='btnClr'><span class='btnText'>Open Issued Book List</span></button>
+            </a>
+        </section>
+ </section>
+
+
+{% endblock%}

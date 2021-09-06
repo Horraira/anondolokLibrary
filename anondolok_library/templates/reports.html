@@ -1,0 +1,180 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>Book Report</title> {% endblock%} {% block content %}
+<style>
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+  .totalbookDiv {
+    background: #81c784;
+  }
+  .issusedbookDiv {
+    background: #64b5f6;
+  }
+  .bookreturnsDiv {
+    background: #ffb74d;
+  }
+  .booklistDiv {
+    background: #e57373;
+  }
+  .page-content {
+    padding-bottom: 0;
+  }
+</style>
+<!--  Report section  -->
+
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="report_title"
+    >
+      ...
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">Lang EN</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+
+<hr />
+<main class="container" style="margin: 0px; padding: 0px">
+  <section class="shadow mt-5">
+    <div
+      class="
+        row
+        container
+        d-flex
+        justify-content-center justify-content-around
+        mt-5
+      "
+    >
+      <div
+        class="col-12 col-md-5 d-flex mb-5 justify-content-around totalbookDiv"
+        style="margin-top: 3rem"
+      >
+        <div style="text-align: center; margin: 12px 0px">
+          <h3 style="color: white" class="langchange" data-key="subtitle1">
+            Total Books
+          </h3>
+          <br />
+          <br /><br />
+          <h1 style="color: white">{{ total_book }}</h1>
+        </div>
+        <div>
+          <img
+            style="margin-top: 50%"
+            src="../static/photos/vector.png"
+            width="100%"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div
+        class="
+          col-12 col-md-5
+          d-flex
+          mb-5
+          justify-content-around
+          issusedbookDiv
+        "
+        style="margin-top: 3rem"
+      >
+        <div style="text-align: center; margin: 12px 0px">
+          <h3 style="color: white" class="langchange" data-key="subtitle2">
+            Issued Books
+          </h3>
+          <br />
+          <br /><br />
+          <h1 style="color: white">{{ issued_book }}</h1>
+        </div>
+        <div>
+          <img
+            style="margin-top: 50%"
+            src="../static/photos/vector.png"
+            width="100%"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div
+        class="
+          col-12 col-md-5
+          d-flex
+          justify-content-around
+          bookreturnsDiv
+          mb-5
+        "
+      >
+        <div style="text-align: center; margin: 12px 0px">
+          <h3 style="color: white" class="langchange" data-key="subtitle3">
+            Books returned
+          </h3>
+          <br />
+          <br /><br />
+          <h1 style="color: white">{{ returned_book }}</h1>
+        </div>
+        <div>
+          <img
+            style="margin-top: 50%"
+            src="../static/photos/vector.png"
+            width="100%"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div
+        class="col-12 col-md-5 d-flex justify-content-around booklistDiv mb-5"
+      >
+        <div style="text-align: center; margin: 12px 0px">
+          <h3 style="color: white" class="langchange" data-key="subtitle4">
+            Books lost
+          </h3>
+          <br />
+          <br /><br />
+          <h1 style="color: white">0</h1>
+        </div>
+        <div>
+          <img
+            style="margin-top: 50%"
+            src="../static/photos/vector.png"
+            width="100%"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock%}

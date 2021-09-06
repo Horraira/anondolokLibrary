@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  max-width: 1920px;
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+#zero-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------- fonts ------------------------------- */
+
+.font-type-header {
+  font-family: "Poppins";
+  font-weight: 700;
+}
+
+.font-type-contact-us {
+  font-family: "Poppins";
+  font-weight: 400;
+}
+
+label {
+  font-family: "Poppins";
+}
+
+/* --------------------------------------------------------- end - fonts */
+
+/* ------------------------- navbar item ------------------------------- */
+
+.nav-item {
+  padding: 0px;
+}
+
+a.navbar-brand {
+  font-family: "Poppins Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  /* font color is with the nav-bar brand */
+}
+
+a.nav-link {
+  font-size: 16px;
+  font-family: "Poppins Condensed";
+  /* font color is with the nav-bar link */
+}
+
+/* -------------------------------------------------------- navbar item */
+
+.center-text-content {
+  text-align: center;
+}
+
+/* ------------------------- contant address --------------------------- */
+
+.main-border {
+  width: 75%;
+  display: block;
+  margin: auto;
+  border: 1px solid rgb(0 0 0 / 25%);
+  /*box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);*/
+  padding: 20px;
+  margin-top: 6px;
+}
+
+.contact-form-border {
+  /* box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25); */
+  box-sizing: border-box;
+  padding: 20px;
+  margin-top: 10px;
+  border: 1px solid #a4a4a4;
+}
+
+.centering-content {
+  display: flex;
+  justify-content: center;
+}
+
+.content-image-centering {
+  display: block;
+  margin: auto;
+  width: 25px;
+  height: 25px;
+}
+
+.content-image-and-location {
+  margin-top: 30px;
+}
+
+.contact-address-text {
+  margin-top: 10px;
+  font-family: "Poppins";
+  font-weight: 400;
+}
+
+/* ---------------------------------------------- end - contant address  */
+
+/* ------------------------------- contact form ------------------------ */
+
+.submit-button {
+  display: block;
+  margin: auto;
+  background: #81c784;
+  color: #ffffff;
+  border: 0;
+  font-size: 16px;
+  border-radius: 5px;
+  padding: 12px;
+}
+
+/* ------------------------------------------------- end - contact form  */
+
+/* -------------------- media screen for mobile ------------------------ */
+/*
+@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait) {
+  .main-border {
+    width: 100%;
+  }
+
+  .main-border {
+    margin-top: 3px;
+  }
+} */
+
+@media screen and (max-width: 540px) {
+  .main-border {
+    width: 100%;
+  }
+
+  .main-border {
+    margin-top: 3px;
+  }
+}
+
+/* --------------------------------------- end - media screen for mobile */
+
+/* --------------------------------- media screen for tablet pro portrait ----------------------------- */
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: portrait) {
+  .main-border {
+    margin-top: 20px;
+  }
+}
+
+/* -------------------------------------------------------- end - media screen for tablet pro portrait  */
+
+/* -------------------------------------  media screen for tablet pro landscape ----------------------- */
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 1.5) and (orientation: landscape) {
+  .main-border {
+    margin-top: 20px;
+  }
+}
+
+/* ------------------------------------------------------  end - media screen for tablet pro landscape */
+
+/* ---------------------------- media screen for tab portrait --------------------------------------- */
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .main-border {
+    margin-top: 20px;
+  }
+}
+
+/* -------------------------------------------------------------- end - media screen for tab portrait */

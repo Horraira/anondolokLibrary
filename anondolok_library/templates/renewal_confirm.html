@@ -1,0 +1,85 @@
+{% extends 'user_side_menu.html' %}
+{% load static %}
+
+	{% block title %}
+        <title>Renewal Request Confirmed</title>
+    {% endblock%}
+
+    {% block cssLink %}
+{#        <link rel="stylesheet" type="text/css" href="{% static 'css/user_appointment.css' %}" />#}
+    {% endblock%}
+    {% block profile %}
+        <div class="admin-profile">
+            <div class="profile">
+                {% if checkUser.is_verified %}
+              <i class="far fa-user-circle"></i>
+                {% else %}
+              <i class="fas fa-user-times"></i>
+                {% endif %}
+              <div class="name">
+                <h3> {{ request.user }} </h3>
+              </div>
+            </div>
+        </div>
+    {% endblock %}
+{% block content %}
+<!-- -------------------------------------- my shelf style -------------------------------------------- -->
+    <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+      font-family: Roboto;
+    }
+
+    .img-style {
+      height: 335px;
+      overflow: hidden;
+    }
+    .img-style img {
+      height: 100%;
+      width: 100%;
+    }
+    </style>
+<!-- -------------------------------------- my shelf section -------------------------------------------- -->
+<main class="container">
+      <section class="shadow p-3 mt-5">
+        <h1>Renewal Request Sent</h1>
+        <div class="d-flex justify-content-center">
+          <!-- bootstrap card -->
+
+          <div class="card shadow mb-5" style="width: 18rem">
+            <div class="img-style">
+              <img src="{{ book.cover_photo.url }}" class="card-img-top" alt="..." />
+            </div>
+            <div class="card-body">
+              <div class="text-center">
+                <h5 class="card-text">
+                  <span style="color: #a4a4a4">Book Name:</span>{{ book.book_name }}
+                </h5>
+                <h5 class="card-text">
+                  <span style="color: #a4a4a4">Writer:</span>{{ book.author_name }}
+                </h5>
+{#                <h5 class="card-text">#}
+{#                  <span style="color: #a4a4a4">Bookid:</span>1202#}
+{#                </h5>#}
+              </div>
+              <div class="text-center mt-3">
+                <button href="#" class="btn btn-secondary">
+                  Request Sent
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- bootstrap card end -->
+        </div>
+      </section>
+    </main>
+
+    <!-- javascript cdn -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+{% endblock%}

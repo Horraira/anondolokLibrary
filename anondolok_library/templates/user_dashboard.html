@@ -1,0 +1,189 @@
+{% extends 'user_side_menu.html' %}
+{% load static %}
+
+	{% block title %} <title>User Dashboard</title> {% endblock%}
+	{% block csslink %}  {% endblock%}
+
+    {% block profile %}
+        <div class="admin-profile">
+            <div class="profile">
+                {% if checkUser.is_verified %}
+              <i class="far fa-user-circle"></i>
+                {% else %}
+              <i class="fas fa-user-times"></i>
+                {% endif %}
+              <div class="name">
+                <h3> {{ request.user }} </h3>
+              </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+{% block content %}
+<!----------------------------------------------------- start body content  ------------------------------------------------------------------->
+		<!----------------------------------------------------- start upper section of admin dashboard  ------------------------------------------------------------------->
+	<!-- language switch start -->
+    <div style="display: flex">
+        <div class="col-7" style="text-align: right">
+            <h5 style="color: #009879;
+            font-size: xx-large;" class="langchange" data-key="dashboard_title" > ... </h5>
+        </div>
+        <div class="col-5 p-2" style="text-align: right">
+            <input type="radio" id="lang_en" name="lang" data-value="en" onchange="changeLang('en');"/>
+            <label for="lang_en">English</label>
+
+            <input type="radio" id="lang_ru" name="lang" data-value="ru" onchange="changeLang('ru');" />
+            <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px">বাংলা</label>
+        </div>
+    </div> <hr>
+    <!-- language switch end -->
+    <section class="grid">
+		<article>
+      <div class="upper_section">
+        <div class="chart_test">
+          <div class="row" style="margin: 0; padding: 0">
+            <!-- ----------------------------------------------- chart js html parts --------------------------------------------- -->
+
+            <!-- -------------- total books read --------------- -->
+            <div class="col-lg-4 col-md-4" style=" padding: 10px; border: 1px solid darkgrey;">
+                <h6 style=" text-align: center; margin: 30px 0px; font-weight: 700; " class="langchange" data-key="tbr">Total Books Read</h6>
+                    <div class="total_book">
+                        <canvas id="layanan_subbagian"></canvas>
+                    </div>
+
+                <!-- ------------- Favourite genre ------------------ -->
+                <h6 style=" margin: 50px 0px; text-align: center; font-weight: 700; " class="langchange" data-key="FG">Favourite Genre</h6>
+                    <div class="genre">
+                      <canvas id="layanan_subbagian_2"></canvas>
+                    </div>
+                <!-- -------------------------- end - Favourite genre -->
+            </div>
+
+          <!-- -------------------------- end - total books read -->
+
+          <!-- ------------------- favourite author ------------- -->
+
+          <div class="col-lg-8 col-md-8" style=" padding: 10px; border: 1px solid darkgrey;">
+                <h6 style=" text-align: center; font-weight: 700; " class="langchange" data-key="FA">Favourite Author</h6>
+                <div class="author">
+                  <canvas id="myChart"></canvas>
+                </div>
+          </div>
+
+          <!-- -------------------------- end - favourite author -->
+        </div>
+      </div>
+    </div>
+      <!-- --------------------------------------------------------------------------------------------- end - chart js html parts  -->
+    </article>
+		<!----------------------------------------------------- end upper section of admin dashboard ------------------------------------------------------------------->
+
+  </section>
+
+<!----------------------------------------------------- end body content  ------------------------------------------------------------------->
+
+
+{% endblock %}
+
+
+
+{% block js %}
+
+<!-- ------------------------------------------- chart javascript parts -------------------------------------------------- -->
+
+<!-- ----------------------- total books read js part -------------------- -->
+<script>
+  var ctx_2 = document.getElementById("layanan_subbagian").getContext("2d");
+  var data_2 = {
+    datasets: [
+      {
+        data: [{{ returned_book }}, {{ issued_book }}],
+        backgroundColor: ["#4FC3F7", "#AED581"],
+      },
+    ],
+    labels: ["Returned", "Issued"],
+  };
+  var myDoughnutChart_2 = new Chart(ctx_2, {
+    type: "doughnut",
+    data: data_2,
+    options: {
+      maintainAspectRatio: false,
+      legend: {
+        position: "bottom",
+        labels: {
+          boxWidth: 12,
+        },
+      },
+    },
+  });
+</script>
+
+<!-- -------------------------------------- end - total books read js part -->
+
+
+<!-- ------------------ favourite author js part ------------------------- -->
+
+
+<script>
+  const labels = ["-----", "-----", "-----", "-----", "-----", "-----"];
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: "Favourite Author",
+        backgroundColor: "#64B5F6",
+        borderColor: "#64B5F6",
+        data: [0, 0, 0, 0, 0, 0, 0],
+      },
+    ],
+  };
+
+  const config = {
+    type: "bar",
+    data,
+    options: {},
+  };
+
+  var myChart = new Chart(document.getElementById("myChart"), config);
+</script>
+
+<!-- -------------------------------------- end - favourite author js part -->
+
+  <!-- ------------------- Favourite genre js part ----------------------- -->
+
+<script>
+  var ctx_3 = document
+    .getElementById("layanan_subbagian_2")
+    .getContext("2d");
+  var data_3 = {
+    datasets: [
+      {
+        data: [{{ first_amount }}, {{ second_amount }}, {{ third_amount }}],
+        backgroundColor: ["#9575CD", "#DCE775", "#F06292"],
+      },
+    ],
+    labels: ["{{ first_book }}", "{{ second_book }}", "{{ third_book }}"],
+  };
+  var myDoughnutChart_3 = new Chart(ctx_3, {
+    type: "pie",
+    data: data_3,
+    options: {
+      maintainAspectRatio: false,
+      legend: {
+        position: "bottom",
+        labels: {
+          boxWidth: 12,
+        },
+      },
+    },
+  });
+</script>
+    <!--  Language Script  -->
+    <script type="text/javascript" src="{% static 'js/language_trans.js' %}"></script>
+  <!-- --------------------------------------------- end - Favourite genre  -->
+
+
+  <!-- -------------------------------------------------------------------------------------- end - chart javascript parts -->
+
+{% endblock %}

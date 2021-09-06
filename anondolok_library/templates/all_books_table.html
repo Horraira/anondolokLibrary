@@ -1,0 +1,166 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>All Books</title>
+{% endblock%} {% block content %}
+
+<!-- -------------------------------------- All books section -------------------------------------------- -->
+
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="allBook_title"
+    >
+      Member Management
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">English</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+<hr />
+<table id="printTable" class="display" style="width: 100%; text-align: center">
+  <thead>
+    <tr>
+      <th class="langchange" data-key="serial">SL</th>
+      <th class="langchange" data-key="allBook_th2">Book Name</th>
+      <th class="langchange" data-key="allBook_th3">Author Name</th>
+      <th class="langchange" data-key="allBook_th4">Genre</th>
+      <th class="langchange" data-key="allBook_th5">Book Details</th>
+      <th class="langchange" data-key="action">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in books %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ book.book_name }}</td>
+      <td>{{ book.author_name }}</td>
+      <td>{{ book.category }}</td>
+      <td><a href="{% url '/book-detail' book.id %}">View Details</a></td>
+      <td>
+        <div class="edit_book">
+          <a href="{% url '/edit-book' book.id %}"
+            ><i class="fas fa-edit"></i
+          ></a>
+        </div>
+        <div class="delete_book">
+          <button
+            style="color: #e57373; outline: none"
+            type="button"
+            data-toggle="modal"
+            data-target="#id{{book.id}}"
+          >
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+
+    <!------------------ Modal -------------------------->
+
+    <div class="modal fade" id="id{{book.id}}" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">
+              <span style="color: #e80202; font-weight: 600"
+                >{{ book.book_name }}</span
+              >
+            </h4>
+          </div>
+          <div class="modal-body">
+            <p class="langchange" data-key="message3">
+              Do you really want to delete the book?
+            </p>
+            <a
+              style="
+                text-decoration: none;
+                padding: 6px 10px;
+                background: #e57373;
+                color: white;
+                border-radius: 10px;
+              "
+              href="{% url 'delete_book' book.id %}"
+              >Delete</a
+            >
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </tbody>
+</table>
+<button
+  id="button-a"
+  style="
+    border: 1px solid;
+    padding: 10px;
+    color: white;
+    background: #009879;
+    border-radius: 15px;
+  "
+  class="langchange"
+  data-key="createExcel"
+>
+  Create Excel
+</button>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#printTable").DataTable();
+  });
+</script>
+
+<!-- -------------------------------------- Download table as .xlsx file section -------------------------------------------- -->
+<script>
+  {#sheet tutorial https://redstapler.co/sheetjs-tutorial-html-table-to-excel/#}
+
+      var wb = XLSX.utils.table_to_book(document.getElementById('printTable'), {sheet:"Sheet JS"});
+      var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+      function s2ab(s) {
+                      var buf = new ArrayBuffer(s.length);
+                      var view = new Uint8Array(buf);
+                      for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                      return buf;
+      }
+      $("#button-a").click(function(){
+      saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), 'test.xlsx');
+      });
+</script>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock%}

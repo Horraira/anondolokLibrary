@@ -1,0 +1,170 @@
+{% extends 'nav_base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Contact us</title>
+{% endblock %}
+
+{% block cssLink %}
+<link rel="stylesheet" href="{% static 'css/contact.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<!-- --------------------------- contact us section ------------------------------ -->
+
+<div class="main-border">
+  <section>
+    <div class="content-option">
+      <div class="row" id="zero-margin-padding">
+        <div class="col"></div>
+        <div class="col-lg-6 col-md-6">
+          <div>
+            <h3 class="center-text-content font-type-header">
+              Get in touch!
+            </h3>
+            <p class="center-text-content font-type-contact-us">
+              For any inquiry feel free to contact us.
+            </p>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+
+    <!-- -------------------content address ------------------------->
+
+    <div class="content-image-and-location">
+      <div class="row" id="zero-margin-padding">
+        <div class="col"></div>
+        <div class="col-lg-12">
+          <div class="row centering-content" id="zero-margin-padding">
+            <div class="col-lg-3 col-md-3">
+              <img
+                src="../static/images/location.png"
+                alt=""
+                class="content-image-centering"
+              />
+              <p style="text-align: center" class="contact-address-text">
+{#                বাড়ী # ৪৪৬, বসুন্ধরা এ্যাপোলো হাসপাতাল সংযোগ সড়ক (বসুন্ধরা ব্লক "এ" দক্ষিণ গেইটের সামনে), ভাটারা, গুলশান, ঢাকা-১২১২#}
+                  House # 446, Bashundhara Apollo Hospital link road(A block south gate), Vatara, Gulshan, Dhaka -1212
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-3">
+              <img
+                src="../static/images/phone.png"
+                alt=""
+                class="content-image-centering"
+              />
+              <p style="text-align: center" class="contact-address-text">
+{#                ০১৭০৮৫৫৫০০৩#}
+                  01708555003
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-3">
+              <img
+                src="../static/images/message.png"
+                alt=""
+                class="content-image-centering"
+              />
+              <p style="text-align: center" class="contact-address-text">
+                anondolokschool@gmail.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col"></div>
+      </div>
+    </div>
+
+    <!-------------- end - content address ------------->
+
+    <!-- ------------------ contact form ------------ -->
+    <div class="contact-form-section">
+      <form action="" method="post">
+          {% csrf_token %}
+        <div class="row centering-content" id="zero-margin-padding">
+          <div class="col"></div>
+          <div class="col-lg-9 contact-form-border">
+            <div class="row centering-content" id="zero-margin-padding">
+              <!-- ------form side 1 -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Your Name</label>
+                  <input
+                    type="text"
+                    name="c_name"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder=""
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Your Email</label>
+                  <input
+                    type="email"
+                    name="c_mail"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder=""
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Phone</label>
+                  <input
+                    type="number"
+                    name="phone"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder=""
+                    required
+                  />
+                </div>
+              </div>
+              <!-- end - form side 1 -->
+
+              <!-- ------form side 2 -->
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1"
+                    >Your Message</label
+                  >
+                  <textarea
+                    class="form-control"
+                    name="message"
+                    id="exampleFormControlTextarea1"
+                    rows="8"
+                  ></textarea>
+                </div>
+              </div>
+
+                {% for message in messages %}
+                    <h3 style=" text-align: center; margin-top: 15px; color: #E91E63;">
+                    {{ message }}
+                    </h3>
+                {% endfor %}
+
+              <div class="col-md-12">
+                <button type="submit" class="submit-button">Send Message</button>
+              </div>
+
+              <!-- end - form side 2 -->
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+      </form>
+    </div>
+    <!-- ------------------------------ contact form  -->
+  </section>
+</div>
+
+<!-- --------------------------------------------- end - contact us section -->
+
+{% endblock %}

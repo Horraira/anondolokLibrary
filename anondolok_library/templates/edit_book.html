@@ -1,0 +1,268 @@
+{% extends 'admin_side_menu.html' %}
+{% load static %}
+
+	{% block title %} <title>Add Books</title> {% endblock%}
+
+
+{% block content %}
+<!-- -------------------------------------- Add books section -------------------------------------------- -->
+
+    <!-- language switch start -->
+    <div style="display: flex">
+        <div class="col-7" style="text-align: right">
+            <h5 style="color: #009879;
+            font-size: xx-large;" class="langchange" data-key="editBook_title" > ... </h5>
+        </div>
+        <div class="col-5 p-2" style="text-align: right">
+            <input type="radio" id="lang_en" name="lang" data-value="en" onchange="changeLang('en');"/>
+            <label for="lang_en">English</label>
+
+            <input type="radio" id="lang_ru" name="lang" data-value="ru" onchange="changeLang('ru');" />
+            <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px">বাংলা</label>
+        </div>
+    </div>
+    <!-- language switch end -->
+    <hr>
+    <section class="add-books-section">
+      <h3 class="add-books-title-text langchange" data-key="editBook_title2">Edit Book Information</h3>
+
+      <!-- --------------------------- form -------------------------- -->
+
+      <form action="" method="POST" enctype="multipart/form-data" class="form-margin-padding">
+          {% csrf_token %}
+        <div class="row row-zero-margin-padding">
+          <div class="col-lg-8 col-md-7">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label1">Book Name</label>
+                  <input
+                    type="text"
+                    name="book_name"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value=" {{ book.book_name }} "
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label2">Author Name</label>
+                  <input
+                    type="text"
+                    name="author_name"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value="{{ book.author_name }}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1" class="langchange" data-key="label3">Genre</label>
+                  <select placeholder="{{ book.category }}" name="category" required class="form-control" id="exampleFormControlSelect1">
+                    <option value="Fiction">Fiction</option>
+                    <option value="Novel">Novel</option>
+                    <option value="Historical">Historical</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Poetry">Poetry</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Humour">Humour</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Politics">Politics</option>
+                    <option value="Motivational">Motivational</option>
+                    <option value="Biography">Biography</option>
+                  </select>
+                </div>
+{#                <div class="form-group">#}
+{#                  <label for="exampleInputEmail1" class="">Category</label>#}
+{#                  <input#}
+{#                    type="text"#}
+{#                    name="category"#}
+{#                    class="form-control"#}
+{#                    id="exampleInputEmail1"#}
+{#                    placeholder="{{ book.category }}"#}
+{#                    required#}
+{#                  />#}
+{#                </div>#}
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label4">Pages</label>
+                  <input
+                    type="text"
+                    name="pages"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value="{{ book.book_pages }}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label6">Price</label>
+                  <input
+                    type="text"
+                    name="price"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value="{{ book.price }}"
+                    required
+                  />
+                </div>
+
+{#                <div class="form-group">#}
+{#                  <label for="exampleInputEmail1" class="">Quantity</label>#}
+{#                  <input#}
+{#                    type="text"#}
+{#                    name="quantity"#}
+{#                    class="form-control"#}
+{#                    id="exampleInputEmail1"#}
+{#                    placeholder="{{ book.quantity }}"#}
+{#                    required#}
+{#                  />#}
+{#                </div>#}
+                  <div class="form-group">
+                  <label for="exampleFormControlSelect1" class="langchange" data-key="label5">Language</label>
+                  <select placeholder="{{ book.language }}" name="language" required class="form-control" >
+                    <option value="Bangla">Bangla</option>
+                    <option value="English">English</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label7">ISBN Number</label>
+                  <input
+                    type="text"
+                    name="isbn_number"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value="{{ book.isbn_number }}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label8">DOI Number</label>
+                  <input
+                    type="text"
+                    name="doi_number"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value="{{ book.doi_number }}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label9">Accession Number</label>
+                  <input
+                    type="text"
+                    name="accession_number"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value="{{ book.accession_number }}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label10"
+                    >Publisher Name</label
+                  >
+                  <input
+                    type="text"
+                    name="publisher_name"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value="{{ book.publisher_name }}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label11"
+                    >Publication Date</label
+                  >
+                  <input
+                    type="text"
+                    name="publisher_date"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value="{{ book.publisher_date }}"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1" class="langchange" data-key="label12">Shelf Number</label>
+                  <input
+                    type="text"
+                    name="shelf_number"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    value="{{ book.shelf_number }}"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1" class="langchange" data-key="label13">Description</label>
+                  <textarea
+                    class="form-control"
+                    name="description"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                    value="{{ book.description }}"
+                    required
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-5">
+            <div class="row row-zero-margin-padding">
+              <div class="col-md-12">
+                <div class="grid-right">
+                  <!-- ------- add books image layout------- -->
+                  <div class="add-books-div">
+                    <img
+{#                      src="../static/images/Vector.png"#}
+                      src="{{ book.cover_photo.url }}"
+                      alt=""
+                      class="add-books-image"
+                    />
+                  </div>
+                  <!--<div class="choose-image-file-div">
+                    <input type="file" name="cover_photo" class="choose-image-file-button" />
+                  </div>-->
+                  <!-- ---------end - add books image layout -->
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="grid-right">
+                  <div class="publish_online_and_book_button">
+                      <button class="add-book-button langchange" data-key="confirm" type="submit">Confirm</button>
+                      <button class="publish-book-button langchange" data-key="cancel" type="reset">  </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- -------------------------- end - publish online and add books section -->
+            </div>
+          </div>
+        </div>
+      </form>
+
+
+      <!-- ---------------------------------------------------- end form -->
+    </section>
+
+    <!--  Language Script  -->
+    <script type="text/javascript" src="{% static 'js/language_trans.js' %}"></script>
+
+{% endblock%}

@@ -1,0 +1,127 @@
+{% extends 'admin_side_menu.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} <title>Appointment List</title> {% endblock %}
+{% block content %}
+<style>
+  tr th {
+    text-align: center;
+  }
+  tr td {
+    text-align: center;
+  }
+</style>
+<!-- -------------------------------------- book list section -------------------------------------------- -->
+
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="apTitle"
+    >
+      Appointments
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">English</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+<hr />
+<table
+  id="example"
+  class="table table-striped table-bordered"
+  style="width: 100%"
+>
+  <thead>
+    <tr>
+      <th class="langchange" data-key="serial">SL</th>
+      <th class="langchange" data-key="apTh2">Member Name</th>
+      <th class="langchange" data-key="apTh3">Date</th>
+      <th class="langchange" data-key="apTh4">Time</th>
+      <th class="langchange" data-key="action">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for appointments in appointment %}
+    <tr>
+      {# print SL number#}
+      <td>{{ forloop.counter }}</td>
+      <td>{{ appointments.user_name }}</td>
+      <td>{{ appointments.requested_date }}</td>
+      <td>{{ appointments.requested_time|time:"H:i a" }}</td>
+      <td>
+        {% if appointments.check_approve == 1 %}
+        <h3
+          style="font-size: large; font-weight: 600; color: #28a745"
+          class="langchange"
+          data-key="approved"
+        >
+          Approved
+        </h3>
+        {% elif appointments.check_approve == 2 %}
+        <a
+          class="btn btn-success langchange"
+          data-key="approve"
+          href="{% url 'app-approve' appointments.id %}"
+          >Approve</a
+        >
+        <a
+          class="btn btn-danger langchange"
+          data-key="deny"
+          href="{% url 'app-denied' appointments.id %}"
+          >Deny</a
+        >
+        {% else %}
+        <h3
+          style="font-size: large; font-weight: 600; color: #dc3545"
+          class="langchange"
+          data-key="denied"
+        >
+          Denied
+        </h3>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock%} {% block js %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock %}

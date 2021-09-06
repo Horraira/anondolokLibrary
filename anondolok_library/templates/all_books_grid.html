@@ -1,0 +1,84 @@
+{% extends 'admin_side_menu.html' %}
+{% load static %}
+
+	{% block title %}
+        <title>All Books</title>
+    {% endblock%}
+
+
+{% block content %}
+    <style>
+        @media screen and (min-width: 768px) {
+            .col-md-3{
+                max-width: 50%;
+        }
+}
+    </style>
+<!-- -------------------------------------- Add books section -------------------------------------------- -->
+    <section class="all_books">
+    <h3 class="all-books-title-text">All Books</h3>
+        <div class="container">
+            <div id="html-item-pagination" class="row">
+                {% for book in books %}
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                  <div class="hip-item">
+                      <figure>
+                          <img src="{{ book.cover_photo.url }}" alt="">
+                          <figcaption>
+                            <p><span style="color: #a4a4a4; ">Book Name :</span> {{ book.book_name }}</p>
+                            <p><span style="color: #a4a4a4; ">Writer :</span> {{ book.author_name }}</p>
+                          </figcaption>
+                      </figure>
+
+                          {% csrf_token %}
+                          <div class="edit_book">
+                            <a href="{% url '/edit-book' book.id %}"><i class="fas fa-edit"></i></a>
+                          </div>
+                          <div class="delete_book">
+                              <button style="color: #E57373; outline: none" type="button" data-toggle="modal" data-target="#id{{book.id}}">
+                                  <i class="far fa-trash-alt"></i>
+                              </button>
+                          </div>
+                  </div>
+                </div>
+
+
+                    <!------------------ Modal -------------------------->
+
+                      <div class="modal fade" id="id{{book.id}}" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h4 class="modal-title"><span style="color: #e80202; font-weight: 600;">{{ book.book_name }}</span></h4>
+                            </div>
+                            <div class="modal-body">
+                              <p>Do you really want to delete the book?</p>
+                                <a style="text-decoration: none;
+                                          padding: 6px 10px;
+                                          background: #E57373;
+                                          color: white;
+                                          border-radius: 10px;"
+                                   href="{% url 'delete_book' book.id %}">Delete</a>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+
+
+<script>
+ $(document).ready(function () {
+   $("#html-item-pagination").hip({itemsPerPage:12,itemsPerRow:3,itemGaps:'20px',paginationPos:'left'});
+ });
+</script>
+
+{% endblock%}

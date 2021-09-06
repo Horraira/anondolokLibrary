@@ -1,0 +1,108 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>Issued Book List</title> {% endblock%} {% block content %}
+<style>
+  tr th {
+    text-align: center;
+  }
+  tr td {
+    text-align: center;
+  }
+</style>
+<!--  book list section  -->
+
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="ibTitle"
+    >
+      Issued Books
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">English</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+<hr />
+<table
+  id="example"
+  class="table table-striped table-bordered"
+  style="width: 100%"
+>
+  <thead>
+    <tr>
+      <th class="langchange" data-key="serial">SL</th>
+      <th class="langchange" data-key="label1">Book Name</th>
+      <th class="langchange" data-key="ibTh2">Issued To</th>
+      <th class="langchange" data-key="ibTh3">Issued Date</th>
+      <th class="langchange" data-key="ibTh4">Due Date</th>
+      <th class="langchange" data-key="ibTh5">Return Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for book in issuedBook %}
+    <tr>
+      {# print SL number#}
+      <td>{{ forloop.counter }}</td>
+      <td>{{ book.book }}</td>
+      <td>{{ book.user }}</td>
+      <td>{{ book.issue_date }}</td>
+      <td>{{ book.due_date }}</td>
+      <td>
+        <a
+          class="delay"
+          style="color: #ffb74d; margin-left: 5px; font-weight: 600"
+          href="#"
+          >Delay Return</a
+        >
+        <a
+          class="lost"
+          style="color: #e57373; margin-left: 5px; font-weight: 600"
+          href="#"
+          >Lost</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock%} {% block js %}
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $("#example").DataTable();
+  });
+</script>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>Settings</title> {% endblock%} {% block link %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/admin_setting.css' %}"
+/>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+  crossorigin="anonymous"
+/>
+{% endblock%} {% block content %}
+<!-- -------------------------------------- qr code section -------------------------------------------- -->
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="setting_title"
+    >
+      Settings
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">Lang EN</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+<hr />
+<main
+  class="d-flex justify-content-center align-content-center main-div mt-5"
+  style="width: 100%"
+>
+  <section class="main-section ps-5" style="padding: 20px">
+    <h3 class="text-style langchange" data-key="setting_title2">Setting</h3>
+    <!-- change password  -->
+    <div class="mt-5">
+      <h5 class="password-text-style" data-key="changePass">
+        Change Password
+        <!-- toogle button -->
+        <button
+          onclick="myFunction()"
+          style="border: none"
+          class="fas fa-chevron-circle-down"
+        ></button>
+        <!-- toogle button -->
+      </h5>
+    </div>
+
+    <div id="passDIV" class="mt-2" style="display: none">
+      <form action="admin_pass_reset" method="POST">
+        {% csrf_token %}
+        <div class="form-div">
+          <label for="" class="langchange" data-key="new_pass"
+            >New Password</label
+          ><br />
+          <input
+            type="password"
+            name="password"
+            id=""
+            style="border: 1px solid"
+          /><br /><br />
+          <label for="" class="langchange" data-key="con_new_pass"
+            >Confirm Password</label
+          ><br />
+          <input
+            type="password"
+            name="password2"
+            id=""
+            style="border: 1px solid"
+          /><br /><br />
+          <div class="text-center">
+            <button
+              class="btn-clr langchange"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              value="Save"
+              data-key="setting_save"
+            >
+              Save
+            </button>
+          </div>
+          {% for message in messages %}
+          <h3 style="text-align: center; margin-top: 15px; color: #e91e63">
+            {{ message }} {{ form.errors }}
+          </h3>
+          {% endfor %}
+        </div>
+      </form>
+    </div>
+    <!-- change password end -->
+    <!-- Modal of password -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <p class="langchange" data-key="message1">
+              Password Changed Succesfully
+            </p>
+          </div>
+          <div class="text-center icon-style mb-3">
+            <i class="far fa-check-circle"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal of password end-->
+    <!-- Admin Password  -->
+    <div>
+      <h5 class="password-text-style">
+        Create New Admin Profile
+        <button
+          onclick="adminFunction()"
+          style="border: none"
+          class="fas fa-chevron-circle-down"
+        ></button>
+      </h5>
+    </div>
+
+    <div id="adminDIV" class="mt-2" style="display: none">
+      <h3
+        style="
+          text-align: center;
+          margin-top: 15px;
+          background: #ded4d4;
+          color: #e91e63;
+        "
+        class="langchange"
+        data-key="message2"
+      >
+        Only Developer Can Access
+      </h3>
+    </div>
+    <!-- Modal of Admin end-->
+  </section>
+</main>
+
+<script>
+  function myFunction() {
+    const displayDiv = document.getElementById("passDIV");
+    if (displayDiv.style.display === "none") {
+      displayDiv.style.display = "block";
+    } else {
+      displayDiv.style.display = "none";
+    }
+  }
+
+  function adminFunction() {
+    const displayDiv = document.getElementById("adminDIV");
+    if (displayDiv.style.display === "none") {
+      displayDiv.style.display = "block";
+    } else {
+      displayDiv.style.display = "none";
+    }
+  }
+</script>
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+  crossorigin="anonymous"
+></script>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock%}

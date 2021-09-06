@@ -1,0 +1,45 @@
+{% extends 'admin_side_menu.html' %}
+{% load static %}
+
+	{% block title %} <title>QR generate</title> {% endblock%}
+
+
+{% block content %}
+<!-- -------------------------------------- qr code section -------------------------------------------- -->
+
+    <div class="qr_title" style="text-align: center">
+        <h2>Book added successfully! <i class="far fa-check-circle" style=" color:#81C784; font-size: larger; "></i></h2>
+    </div>
+
+      <div class="input-group mb-3">
+        <div id="printableArea" style="margin: auto">
+          {{ svg|safe }}
+        </div>
+      </div>
+
+{#    <button onclick="document.location='default.asp'">HTML Tutorial</button>#}
+    <div class="buttons" class="title" style="text-align: center">
+        <div class="print_button">
+            <button onclick="printDiv('printableArea')" type="button" class="btn btn-success">Print QR Code</button>
+        </div>
+        <div class="back_button">
+            <a href='all_books'>
+                <button>Back to All Books</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function printDiv(divName) {
+             var printContents = document.getElementById(divName).innerHTML;
+             var originalContents = document.body.innerHTML;
+
+             document.body.innerHTML = printContents;
+
+             window.print();
+
+             document.body.innerHTML = originalContents;
+        }
+    </script>
+
+{% endblock%}

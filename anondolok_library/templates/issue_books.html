@@ -1,0 +1,185 @@
+{% extends 'admin_side_menu.html' %} {% load static %} {% block title %}
+<title>Issue Books</title> {% endblock%} {% block content %}
+
+<!-- language switch start -->
+<div style="display: flex">
+  <div class="col-7" style="text-align: right">
+    <h5
+      style="color: #009879; font-size: xx-large"
+      class="langchange"
+      data-key="IB_title"
+    >
+      ...
+    </h5>
+  </div>
+  <div class="col-5 p-2" style="text-align: right">
+    <input
+      type="radio"
+      id="lang_en"
+      name="lang"
+      data-value="en"
+      onchange="changeLang('en');"
+    />
+    <label for="lang_en">English</label>
+
+    <input
+      type="radio"
+      id="lang_ru"
+      name="lang"
+      data-value="ru"
+      onchange="changeLang('ru');"
+    />
+    <label for="lang_ru" style="border-left: 1px solid; padding: 0 10px"
+      >বাংলা</label
+    >
+  </div>
+</div>
+<!-- language switch end -->
+<hr />
+<div class="book-issue-content">
+  <div>
+    <h3 class="book-issue-content--text langchange" data-key="IB_title">
+      Issue Books
+    </h3>
+    <!-- ------------------------------- form ------------------------------ -->
+    <form action="{% url 'issue_books' book.id %}" method="POST">
+      {% csrf_token %}
+      <!-- ------------------- input types ---------------------- -->
+      <div class="input-types">
+        <div class="row" id="zero_margin_padding">
+          <div class="col-md-8">
+            <div class="row" id="zero_margin_padding">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="langchange" data-key="userName">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    aria-describedby="emailHelp"
+                    placeholder=""
+                    name="username"
+                    required
+                  />
+                  <!-- <small id="emailHelp" class="form-text text-muted"
+                      >We'll never share your email with anyone else.</small
+                    > -->
+                </div>
+                <div class="form-group">
+                  <label class="langchange" data-key="ibTh3">Issue Date</label>
+                  <input type="text" class="form-control" id=""
+                  aria-describedby="emailHelp" placeholder="{% now "jS F Y" %}"
+                  name="issue_date" readonly />
+                  <!-- <small id="emailHelp" class="form-text text-muted"
+                      >We'll never share your email with anyone else.</small
+                    > -->
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="langchange" data-key="modal_title"
+                    >Book ID</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    aria-describedby="emailHelp"
+                    placeholder="{{ book.id }}"
+                    name="book_id"
+                    readonly
+                  />
+                  <!-- <small id="emailHelp" class="form-text text-muted"
+                      >We'll never share your email with anyone else.</small
+                    > -->
+                </div>
+                <div class="form-group">
+                  <label class="langchange" data-key="ibTh4">Due Date</label>
+                  <input
+                    class="form-control"
+                    id=""
+                    aria-describedby="emailHelp"
+                    value="{{ due_date }}"
+                    name="due_date"
+                    required
+                  />
+                  <!-- <small id="emailHelp" class="form-text text-muted"
+                      >We'll never share your email with anyone else.</small
+                    > -->
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label
+                    for="exampleFormControlTextarea1"
+                    class="langchange"
+                    data-key="notes"
+                    >Notes</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                  ></textarea>
+                </div>
+                <h3
+                  style="text-align: center; margin-top: 15px; color: #e91e63"
+                >
+                  {{ e }}
+                </h3>
+                {% for message in messages %}
+                <h3
+                  style="text-align: center; margin-top: 15px; color: #e91e63"
+                >
+                  {{ message }}
+                </h3>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="add-books-div">
+                  <img
+                    src="{{ book.cover_photo.url }}"
+                    alt="wrong attempt"
+                    class="add-books-image"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ----------------------------------- end - input types  -->
+
+      <!-- ------------------- buttons -------------------------- -->
+
+      <div class="action-buttons">
+        <button
+          class="cancel-button langchange"
+          data-key="cancel"
+          onclick="location.href='admin-dashboard'"
+        >
+          Cancel
+        </button>
+        <button class="issue-button langchange" data-key="issueBook">
+          Issue Book
+        </button>
+      </div>
+
+      <!-- ----------------------------------------- end buttons  -->
+    </form>
+    <!-- -------------------------------------------------------- end -  form -->
+  </div>
+</div>
+
+<!--  Language Script  -->
+<script
+  type="text/javascript"
+  src="{% static 'js/language_trans.js' %}"
+></script>
+
+{% endblock%}
